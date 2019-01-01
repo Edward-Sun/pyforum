@@ -19,6 +19,9 @@
                             <th class="col-sm-1 sorttable-nosort">标题</th>
                             <th class="col-sm-1 sorttable-nosort">用户</th>
                             <th class="col-sm-1 sorttable-nosort">
+                                楼数
+                            </th>
+                            <th class="col-sm-1 sorttable-nosort">
                                 阅读数
                             </th>
                             <th class="col-sm-1 sorttable-nosort">
@@ -33,22 +36,32 @@
                                 <td>{{ row.id }}</td>
                                 <td>{{ row.title }}</td>
                                 <td>{{ row.user_id }}</td>
+                                <td>{{ row.comment_floor }}</td>
                                 <td>{{ row.read_count }}</td>
                                 <td>{{ row.like_count }}</td>
                                 <td>{{ row.posted_at|datetime }}</td>
                                 <td>{{ row.updated_at|datetime }}</td>
                                 <td>
+                                    {% with url='backend.view_post_page', params={'id': row.id} %}
+                                        <a href="{{ url_for(url,**(params or {})) }}"
+                                           type="button"
+                                           class="btn btn-info btn-sm"
+                                           title="">查看</a>
+                                    {% endwith %}
+                                    
+                                    {# TODO 只有作者和管理员才能编辑 #}                          
                                     {% with url='backend.update_post_page', params={'id': row.id} %}
                                         <a href="{{ url_for(url,**(params or {})) }}"
                                            type="button"
                                            class="btn btn-info btn-sm"
                                            title="">编辑</a>
-                                    {% endwith %}
+                                    {% endwith %}                                    
+                                    
                                 </td>
                             </tr>
                         {% else %}
                             <tr>
-                                <td colspan=10 class="center">无数据</td>
+                                <td colspan=10 class="center">无帖子</td>
                             </tr>
                         {% endfor %}
 

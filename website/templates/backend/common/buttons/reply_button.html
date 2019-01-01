@@ -1,0 +1,10 @@
+{% if g.pagination %}
+<a type="button" class="btn btn-info"  href="{{ url_for(url, key=data.key, offset=g.pagination.offset-g.pagination.limit if g.pagination.offset-g.pagination.limit > 0 else 0, limit=g.pagination.limit, **(params or {})) }}">
+    <span class="glyphicon glyphicon-plus"> </span>
+    {{ text or '回复' }}
+</a>
+{% else %}
+<a type="button" class="btn btn-info" href="{{ url_for(url, **(params or {})) }}"> 
+    {{ text or '回复' }}
+</a>
+{% endif %}

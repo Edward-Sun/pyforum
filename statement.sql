@@ -78,30 +78,71 @@ CREATE TABLE `post` (
   `posted_at` int unsigned NOT NULL  COMMENT '帖子发布时间',
   `read_count` int unsigned NOT NULL DEFAULT 0 COMMENT '阅读数',
   `like_count` int unsigned NOT NULL DEFAULT 0 COMMENT '点赞数',
-  `comment_floor` int unsigned NOT NULL DEFAULT 0 COMMENT '评论当前楼层',
+  `comment_floor` int unsigned NOT NULL DEFAULT 1 COMMENT '评论当前楼层',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='文章';
 #文章表------结束
 
 #测试数据
 INSERT INTO `post` (`title`,`user_id`,`module_id`,`content`,
-                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor`)
-    VALUES ('测试1',1,1,'测试1内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,0);
+                    `created_at`,`posted_at`,`updated_at`)
+    VALUES ('测试1',1,1,'测试1内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP());
 INSERT INTO `post` (`title`,`user_id`,`module_id`,`content`,
-                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor`)
-    VALUES ('测试2',1,1,'测试2内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,0);
+                    `created_at`,`posted_at`,`updated_at`)
+    VALUES ('测试2',1,1,'测试2内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP());
 INSERT INTO `post` (`title`,`user_id`,`module_id`,`content`,
-                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor`)
-    VALUES ('测试3',1,2,'测试3内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,0);
+                    `created_at`,`posted_at`,`updated_at`)
+    VALUES ('测试3',1,2,'测试3内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP());
 INSERT INTO `post` (`title`,`user_id`,`module_id`,`content`,
-                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor`)
-    VALUES ('测试4',1,2,'测试4内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,0);
+                    `created_at`,`posted_at`,`updated_at`)
+    VALUES ('测试4',1,2,'测试4内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP());
 INSERT INTO `post` (`title`,`user_id`,`module_id`,`content`,
-                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor`)
-    VALUES ('测试5',2,1,'测试5内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,0);
+                    `created_at`,`posted_at`,`updated_at`)
+    VALUES ('测试5',2,1,'测试5内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP());
 INSERT INTO `post` (`title`,`user_id`,`module_id`,`content`,
-                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor`)
-    VALUES ('测试6',2,1,'测试6内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,0);
+                    `created_at`,`posted_at`,`updated_at`)
+    VALUES ('测试6',2,1,'测试6内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP());
 INSERT INTO `post` (`title`,`user_id`,`module_id`,`content`,
-                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor`)
-    VALUES ('测试7',2,2,'测试7内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,0);
+                    `created_at`,`posted_at`,`updated_at`)
+    VALUES ('测试7',2,2,'测试7内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP());
+    
+    
+#回复表-------开始
+DROP TABLE IF EXISTS `reply`;
+CREATE TABLE `reply` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int unsigned NOT NULL COMMENT '作者id',
+  `post_id` int unsigned NOT NULL COMMENT '帖子id',
+  `content` text NOT NULL COMMENT '内容',
+  `created_at` int unsigned NOT NULL COMMENT '回复创建时间',
+  `updated_at` int unsigned NOT NULL COMMENT '回复修改时间',
+  `posted_at` int unsigned NOT NULL  COMMENT '回复发布时间',
+  `read_count` int unsigned NOT NULL DEFAULT 0 COMMENT '阅读数',
+  `like_count` int unsigned NOT NULL DEFAULT 0 COMMENT '点赞数',
+  `comment_floor_num` int unsigned NOT NULL COMMENT '评论当前楼层数',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='回复';
+#回复表------结束
+
+INSERT INTO `reply` (`user_id`,`post_id`,`content`,
+                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor_num`)
+    VALUES (1,1,'回复1内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,2);
+INSERT INTO `reply` (`user_id`,`post_id`,`content`,
+                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor_num`)
+    VALUES (1,1,'回复2内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,3);
+INSERT INTO `reply` (`user_id`,`post_id`,`content`,
+                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor_num`)
+    VALUES (2,1,'回复3内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,4);
+INSERT INTO `reply` (`user_id`,`post_id`,`content`,
+                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor_num`)
+    VALUES (2,1,'回复4内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,5);
+INSERT INTO `reply` (`user_id`,`post_id`,`content`,
+                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor_num`)
+    VALUES (1,1,'回复5内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,6);
+INSERT INTO `reply` (`user_id`,`post_id`,`content`,
+                    `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`,`comment_floor_num`)
+    VALUES (1,1,'回复6内容',UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),0,0,7);
+    
+UPDATE `post`
+SET `comment_floor` = 7
+WHERE `id` = 1;

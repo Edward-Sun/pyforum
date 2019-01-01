@@ -22,11 +22,10 @@ class Module(db_wrapper.Model):
     @staticmethod
     def get_module_name(id):
         """获取板块名字"""
-        x = [module.name for module in Module.select().where(Module.id == id)]
-        if len(x) == 1:
-            return x[0]   
-        else:
-            return 'None'
+        module = Module.get(Module.id == id)
+        if not module:
+            raise MainException.NOT_FOUND
+        return module.name
     
     @staticmethod
     def get_menus():
@@ -52,12 +51,8 @@ class RoleUserModule(db_wrapper.Model):
 
     @staticmethod
     def get_role_id_by_module_and_user(module_id, user_id):
-        role_id = [row.role_id for row in 
-                   RoleUserModule.select().where(
-                       RoleUserModule.module_id == module_id,
-                       RoleUserModule.user_id == user_id
-                   )]
-        if len(role_id) > 0:
-            return role_id[0]
-        else:
+        role_user_module = RoleUserModule.get(RoleUserModule.module_id == module_id,
+                                              RoleUserModule.user_id == user_id)
+        if not role_user_module:
             return 20
+        return role_user_module.role_id

@@ -1,0 +1,118 @@
+{% extends 'template.html' %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <!-- /.以下是原帖 -->
+                <div class="box-body">
+                    <div class="panel panel-default">
+                    <div class="panel-heading">
+                    <table class="table table-bordered">
+                        <tbody>                        
+                            <tr>
+                                <th class="col-sm-1 sorttable-nosort">
+                                    楼数
+                                </th>
+                                <th class="col-sm-1 sorttable-nosort">帖子ID</th>
+                                <th class="col-sm-1 sorttable-nosort">用户</th>
+                                <th class="col-sm-1 sorttable-nosort">
+                                    点赞数
+                                </th>
+                                <th class="col-sm-1 sorttable-nosort">发帖时间</th>
+                                <th class="col-sm-1 sorttable-nosort">更新时间</th>
+                                <th class="col-sm-2 sorttable-nosort">操作</th>
+                            </tr>                        
+                            <tr data-id="{{ page_header['id'] }}" class="icon-tr">
+                                <td>{{ 1 }}</td>
+                                <td>{{ page_header['id'] }}</td>
+                                <td>{{ page_header['user_id'] }}</td>
+                                <td>{{ page_header['like_count'] }}</td>
+                                <td>{{ page_header['posted_at']|datetime }}</td>
+                                <td>{{ page_header['updated_at']|datetime }}</td>
+                                <td>                                  
+                                    {# TODO 只有作者和管理员才能编辑 #}                          
+                                    {% with url='backend.update_post_page', params={'id': page_header['id']} %}
+                                        <a href="{{ url_for(url,**(params or {})) }}"
+                                           type="button"
+                                           class="btn btn-info btn-sm"
+                                           title="">编辑</a>
+                                    {% endwith %} 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="panel-body">{{ page_header['content']|safe }}</div>
+                    </div>
+                </div>
+                <!-- /.以下是回复-->
+                
+                <div class="box-body">                  
+                    {% for row in rows %}
+                    <div class="panel panel-default">
+                    <div class="panel-heading">
+                    <table class="table table-bordered">
+                        <tbody>                        
+                            <tr>
+                                <th class="col-sm-1 sorttable-nosort">
+                                    楼数
+                                </th>
+                                <th class="col-sm-1 sorttable-nosort">回复ID</th>
+                                <th class="col-sm-1 sorttable-nosort">用户</th>
+                                <th class="col-sm-1 sorttable-nosort">
+                                    点赞数
+                                </th>
+                                <th class="col-sm-1 sorttable-nosort">发帖时间</th>
+                                <th class="col-sm-1 sorttable-nosort">更新时间</th>
+                                <th class="col-sm-2 sorttable-nosort">操作</th>
+                            </tr>                        
+                            <tr data-id="{{ row.id }}" class="icon-tr">
+                                <td>{{ row.comment_floor_num }}</td>
+                                <td>{{ row.id }}</td>
+                                <td>{{ row.user_id }}</td>
+                                <td>{{ row.like_count }}</td>
+                                <td>{{ row.posted_at|datetime }}</td>
+                                <td>{{ row.updated_at|datetime }}</td>
+                                <td>                                  
+                                    {# TODO 只有作者和管理员才能编辑 #}                          
+                                    {% with url='backend.update_reply_page', params={'id': row.id} %}
+                                        <a href="{{ url_for(url,**(params or {})) }}"
+                                           type="button"
+                                           class="btn btn-info btn-sm"
+                                           title="">编辑</a>
+                                    {% endwith %} 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    <div class="panel-body">{{ row.content|safe }}</div>
+                    </div>
+                    {% else %}
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td colspan=10 class="center">无回复</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {% endfor %}
+                </div>
+                
+                <div class="box-footer clearfix ">
+                    {{ paginate.links }}
+                </div>
+                <div class="box-footer with-border">
+                    {% with url='backend.create_reply_page', params={'id': page_header['id']} %}
+                        {% include 'common/buttons/reply_button.html' %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}
