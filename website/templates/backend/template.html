@@ -148,8 +148,8 @@ desired effect
 
                 {% for item in g.menu %}
                     {% if permission(item.id) %}
-                        <li class="treeview {% if g.cur_menu and item.id == g.cur_menu[0]['parent_id'] %} active {% endif %}">
-                            <a href="{{item.uri}}">
+                        <li class="treeview {% if item.id == g.cur_menu %} active {% endif %}">
+                            <a href="{{item.url}}">
                                 <i class="fa fa-link"></i>
                                 <span>{{ item.name }}</span>
                                 <span class="pull-right-container">
@@ -171,12 +171,8 @@ desired effect
         <section class="content-header">
             <h1>
                 {{ page_header['title'] or '' }}
-                {#                <small>Optional description</small>#}
             </h1>
-            {#            <ol class="breadcrumb">#}
-            {#                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>#}
-            {#                <li class="active">Here</li>#}
-            {#            </ol>#}
+            {{ page_header['content'] or '' }}
         </section>
 
         <!-- Main content -->

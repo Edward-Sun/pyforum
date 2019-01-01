@@ -45,9 +45,9 @@ CREATE TABLE `module` (
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT = '模块表';
 
-insert into module(id,parent_id,name,url,weight) values(1,0,'文章模块1','/module/1',900);
-insert into module(id,parent_id,name,url,weight) values(2,0,'文章模块2','/module/2',800);
-insert into module(id,parent_id,name,url,weight) values(3,0,'文章模块3','/module/3',700);
+insert into module(id,parent_id,name,url,weight) values(1,0,'版块1','/module/1',900);
+insert into module(id,parent_id,name,url,weight) values(2,0,'版块2','/module/2',800);
+insert into module(id,parent_id,name,url,weight) values(3,0,'版块3','/module/3',700);
 
 #角色用户模块表 -----开始
 DROP TABLE IF EXISTS `role_user_module`;

@@ -24,10 +24,13 @@ def check_permission(f):
     return decorated_function
 
 def init_menus():
-    g.uri_path = request.path
+    g.url_path = request.path
     menus = Module.get_menus()
     g.menu = menus
-    g.cur_menu = menus
+    g.cur_menu = None
+    for menu in menus:
+        if menu['url'] in request.path:
+            g.cur_menu = menu
     g.modules = Module.get_all_modules()
 
 def get_user_id():

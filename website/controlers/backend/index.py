@@ -16,4 +16,6 @@ __author__ = 'walker_lee&edward_sun'
 @confirm_required
 @check_permission
 def index():
-    return render_template('template.html',page_header={'title':'PKU Forum: Best Forum in Peking University'})
+    return render_template('template.html', page_header={
+        'title':'PKU Forum: Best Forum in Peking University',
+        'content':'This forum is powered by mly, zjh, and szq.'})

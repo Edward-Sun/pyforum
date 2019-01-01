@@ -184,8 +184,7 @@ def init_context_processor(app):
         """激活左边栏当前模块样式"""
 
         def active_cur_menu(per):
-            if g.uri_path.startswith(per):
-            # if g.uri_path == per:
+            if g.url_path.startswith(per):
                 return True
 
             return False

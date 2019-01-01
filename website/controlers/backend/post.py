@@ -28,7 +28,7 @@ from ...blueprints import backend
 def post_list(id):
     rows = Post.get_post_list_by_module(id)
     return object_list('post/list.html', paginate=FlaskPagination(query=rows), query=rows,
-                       context_variable='rows', paginate_by=10, check_bounds=False, page_header={'title': '板块文章列表'})
+                       context_variable='rows', paginate_by=10, check_bounds=False, page_header={'title': '板块文章列表', 'id': id})
 
 @backend.route('/posts/<int:id>/create', methods=['GET'])
 @login_required
