@@ -18,14 +18,22 @@ class Module(db_wrapper.Model):
 
     class Meta:
         db_table = 'module'
-
+    
+    @staticmethod
+    def get_module_name(id):
+        """获取板块名字"""
+        x = [module.name for module in Module.select().where(Module.id == id)]
+        if len(x) == 1:
+            return x[0]   
+        else:
+            return 'None'
+    
     @staticmethod
     def get_menus():
         """获取菜单"""
         menus = [model_to_dict(row) for row in
                 Module.select().order_by(Module.parent_id.asc(), 
                                          Module.weight.desc())]
-
         return menus
 
     @staticmethod

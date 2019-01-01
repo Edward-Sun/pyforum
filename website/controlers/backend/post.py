@@ -10,6 +10,7 @@ from website.http.paginate import FlaskPagination
 from website.http.request import Request
 from website.http.response import Response
 from website.models.post import Post
+from website.models.module import Module
 
 __author__ = 'walker_lee&edward_sun'
 
@@ -27,8 +28,9 @@ from ...blueprints import backend
 @check_permission
 def post_list(id):
     rows = Post.get_post_list_by_module(id)
+    module_name = Module.get_module_name(id)
     return object_list('post/list.html', paginate=FlaskPagination(query=rows), query=rows,
-                       context_variable='rows', paginate_by=10, check_bounds=False, page_header={'title': '板块文章列表', 'id': id})
+                       context_variable='rows', paginate_by=10, check_bounds=False, page_header={'title': module_name+' 文章列表', 'id': id})
 
 @backend.route('/posts/<int:id>/create', methods=['GET', 'POST'])
 @login_required

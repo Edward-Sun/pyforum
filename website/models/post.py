@@ -8,8 +8,8 @@ from website.util.common_utils import filter_same_element
 
 __author__ = 'walker_lee&edward_sun'
 
-from peewee import IntegerField, CharField, PrimaryKeyField, Model, TextField, JOIN
-
+from peewee import IntegerField, CharField, PrimaryKeyField, Model, TextField, JOIN, fn
+from website.models.user import User
 
 class Post(db_wrapper.Model):
     id = PrimaryKeyField()
