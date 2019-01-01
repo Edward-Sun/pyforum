@@ -8,18 +8,10 @@ define(function (require, exports, module) {
     var helper = {
         getData: function () {
             var title = Util.trimValById('title');
-            var summary = Util.trimValById('summary');
             var content = this.getEditorData();
-            var tags = [];
-            $('.tag').each(function (index) {
-                var $this = $(this);
-                tags.push($this.text());
-            });
             return {
                 'title': title,
-                'summary': summary,
                 'content': content,
-                'tags':tags
             };
         },
         validData: function (data) {
@@ -28,20 +20,9 @@ define(function (require, exports, module) {
                 toastr.warning('请填写标题');
                 return false;
             }
-            var item = data['summary'];
-            if (Util.isEmpty(item)) {
-                toastr.warning('请填写文章概要');
-                return false;
-            }
             var item = data['content'];
             if (Util.isEmpty(item)) {
                 toastr.warning('请填写内容');
-                return false;
-            }
-            var item = data['tags'];
-            // 限制tag标签不得大于5个
-            if(item && item.length>5){
-                toastr.warning('标签数不能大于5个');
                 return false;
             }
             return true;
