@@ -30,7 +30,6 @@ mail = Mail()
 db_wrapper = None
 db = None
 login_manager = LoginManager()
-# login_manager.session_protection = 'strong'
 login_manager.session_protection = None
 login_manager.login_view = 'backend.login'
 
