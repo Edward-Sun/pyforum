@@ -12,7 +12,7 @@ class Module(db_wrapper.Model):
     id = PrimaryKeyField()
     parent_id = IntegerField()
     name = CharField()
-    uri = CharField()
+    url = CharField()
     prefix = CharField()
     weight = SmallIntegerField()
 
@@ -32,7 +32,7 @@ class Module(db_wrapper.Model):
     def get_all_modules():
         """获取所有模块id"""
         
-        return [module for module.id in Module.select()]
+        return [module.id for module in Module.select()]
     
 class RoleUserModule(db_wrapper.Model):
     role_id = SmallIntegerField()
