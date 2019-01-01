@@ -30,10 +30,12 @@ class Post(db_wrapper.Model):
 
     @staticmethod
     def get_post_list_query():
-        return Post.select(Post, fn.GROUP_CONCAT(PostTagRelate.tag_name).alias('tags')).join(PostTagRelate, JOIN.LEFT_OUTER,
-                                                                                      on=(
-                                                                                      PostTagRelate.post_id == Post.id)).group_by(
-            Post.id)
+        return Post.select(Post, 
+                           fn.GROUP_CONCAT(PostTagRelate.tag_name).alias('tags')
+                          ).join(PostTagRelate, 
+                                 JOIN.LEFT_OUTER,
+                                 on=(PostTagRelate.post_id == Post.id)
+                                ).group_by(Post.id)
 
     @staticmethod
     def create_post(user_id, title, summary, content, tags=[]):

@@ -36,3 +36,18 @@ nohup: ignoring input
 133254:C 01 Jan 2019 19:40:02.631 * DB saved on disk
 133254:C 01 Jan 2019 19:40:02.632 * RDB: 6 MB of memory used by copy-on-write
 112229:M 01 Jan 2019 19:40:02.692 * Background saving terminated with success
+112229:M 01 Jan 2019 19:45:03.019 * 100 changes in 300 seconds. Saving...
+112229:M 01 Jan 2019 19:45:03.020 * Background saving started by pid 135349
+135349:C 01 Jan 2019 19:45:03.150 * DB saved on disk
+135349:C 01 Jan 2019 19:45:03.150 * RDB: 2 MB of memory used by copy-on-write
+112229:M 01 Jan 2019 19:45:03.220 * Background saving terminated with success
+112229:M 01 Jan 2019 19:55:40.940 * 100 changes in 300 seconds. Saving...
+112229:M 01 Jan 2019 19:55:40.940 * Background saving started by pid 139778
+139778:C 01 Jan 2019 19:55:40.986 * DB saved on disk
+139778:C 01 Jan 2019 19:55:40.987 * RDB: 4 MB of memory used by copy-on-write
+112229:M 01 Jan 2019 19:55:41.040 * Background saving terminated with success
+112229:M 01 Jan 2019 20:02:56.109 * 100 changes in 300 seconds. Saving...
+112229:M 01 Jan 2019 20:02:56.109 * Background saving started by pid 142855
+142855:C 01 Jan 2019 20:02:56.150 * DB saved on disk
+142855:C 01 Jan 2019 20:02:56.151 * RDB: 2 MB of memory used by copy-on-write
+112229:M 01 Jan 2019 20:02:56.210 * Background saving terminated with success

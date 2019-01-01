@@ -46,25 +46,10 @@ CREATE TABLE `manage_module` (
 
 ALTER TABLE `manage_module` ADD INDEX `i_parentid_weight`(`parent_id`,`weight`);
 
-insert into manage_module(id,parent_id,name,uri,weight)values(1,0,'文章','/posts',900);
+insert into manage_module(id,parent_id,name,uri,weight)values(1,0,'文章模块','/posts',900);
 insert into manage_module(id,parent_id,name,uri,prefix,weight)values(2,1,'文章管理','/posts','/posts',800);
 insert into manage_module(id,parent_id,name,uri,prefix,weight)values(3,1,'标签管理','/tags','/tags',700);
-#用户角色说明------ 开始
-DROP  TABLE IF EXISTS `user_role`;
-
-CREATE TABLE `user_role` (
-  `id`  SMALLINT(4)  UNSIGNED NOT NULL COMMENT '角色id',
-  `des` VARCHAR(100) NOT NULL  DEFAULT ''
-  COMMENT '角色说明',
-  PRIMARY KEY (`id`)
-)
-  ENGINE = InnoDB
-  DEFAULT CHARSET = utf8
-  COMMENT = '用户角色说明表';
-INSERT INTO `user_role` (id, des) VALUES (1, '普通用户');
-INSERT INTO `user_role` (id, des) VALUES (4, '小编');
-INSERT INTO `user_role` (id, des) VALUES (256, '管理员');
-#用户角色说明------ 结束
+insert into manage_module(id,parent_id,name,uri,weight)values(4,0,'文章模块2','/posts2',900);
 
 #角色模块表 -----开始
 
@@ -72,7 +57,7 @@ DROP TABLE IF EXISTS `role_module`;
 CREATE TABLE `role_module` (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `role_id`   SMALLINT(4) UNSIGNED      NOT NULL DEFAULT 20
-  COMMENT '用户角色id, 0:普通用户, 256:管理员',
+  COMMENT '用户角色id, 20:普通用户, 256:管理员',
   `module_id` INT(10) UNSIGNED NOT NULL
   COMMENT '模块id',
   PRIMARY KEY (`id`)
