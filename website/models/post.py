@@ -32,11 +32,11 @@ class Post(db_wrapper.Model):
         return Post.select().where(Post.module_id == module_id)
 
     @staticmethod
-    def create_post(user_id, title, content):
+    def create_post(user_id, module_id, title, content):
         now = time.time()
         with db.transaction():
-            post = Post(title=title, user_id=user_id, content=content,
-                        created_at=now, updated_at=now)
+            post = Post(title=title, user_id=user_id, module_id=module_id, content=content,
+                        posted_at=now, updated_at=now)
             post.save()
 
     @staticmethod

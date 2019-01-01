@@ -18,4 +18,4 @@ __author__ = 'walker_lee&edward_sun'
 def index():
     return render_template('template.html', page_header={
         'title':'PKU Forum: Best Forum in Peking University',
-        'content':'This forum is powered by mly, zjh, and szq.'})
+        'content':'Database Course Project'})

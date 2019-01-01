@@ -30,44 +30,49 @@ def post_list(id):
     return object_list('post/list.html', paginate=FlaskPagination(query=rows), query=rows,
                        context_variable='rows', paginate_by=10, check_bounds=False, page_header={'title': '板块文章列表', 'id': id})
 
-@backend.route('/posts/<int:id>/create', methods=['GET'])
+@backend.route('/posts/<int:id>/create', methods=['GET', 'POST'])
 @login_required
 @confirm_required
 @check_permission
 def create_post_page(id):
-    return render_template('post/edit.html',
-                           check_bounds=False,
-                           page_header={'title': '创建文章'},
-                           data={'row': {'module_id':id}})
+    #print('METHOD', request.method, request.method == 'POST')
 
-@backend.route('/posts/<int:id>/create', methods=['POST'])
-@login_required
-@confirm_required
-@check_permission
-def create_post(id):
-    data = Request(request).json()
-    print('data:', data)
-    Post.create_post(user_id=get_user_id(), title=data['title'], content=data['content'])
-    return Response()
+    if request.method == 'POST':
+        print('POST Info')
+        print(request.form)
+        print('POST Info')
+        title = request.form['title']
+        content = request.form['content']
+        Post.create_post(user_id=get_user_id(), module_id=id, title=title, content=content)
+        return post_list(id)
+    else:
+        return render_template('post/edit.html',
+                               check_bounds=False,
+                               page_header={'title': '创建文章', 'id':id, 'method':'create_post_page'},
+                               data={'row': {'module_id':id}})
 
-@backend.route('/posts/<int:id>/edit', methods=['GET'])
+@backend.route('/posts/<int:id>/edit', methods=['GET', 'POST'])
 @login_required
 @confirm_required
 @check_permission
 def update_post_page(id):
-    post = Post.get(Post.id == id)
-    if not post:
-        abort(404)
-    return render_template('post/edit.html',
-                           page_header={'title': '编辑文章'},
-                           data={'row': post})
-
-@backend.route('/posts/<int:id>/edit', methods=['POST'])
-@login_required
-@confirm_required
-@check_permission
-def update_post(id):
-    data = Request(request).json()
-    print('data:', data)
-    Post.update_post(post_id=id, title=data['title'], content=data['content'])
-    return Response()
+    #print('METHOD', request.method, request.method == 'POST')
+    
+    if request.method == 'POST':
+        print('POST Info')
+        print(request.form)
+        print('POST Info')
+        id = request.form['id']
+        module_id = request.form['module_id']
+        title = request.form['title']
+        content = request.form['content']
+        
+        Post.update_post(post_id=id, title=title, content=content)
+        return post_list(module_id)
+    else:
+        post = Post.get(Post.id == id)
+        if not post:
+            abort(404)
+        return render_template('post/edit.html',
+                               page_header={'title': '编辑文章', 'id':id, 'method':'update_post_page'},
+                               data={'row': post})

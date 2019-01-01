@@ -13,19 +13,20 @@
 
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <form class="form-horizontal">
+                    {% with url='backend.'+page_header['method'], params={'id': page_header['id']} %}
+                    <form class="form-horizontal" action = "{{ url_for(url, **(params or {})) }}" method = "post">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-                        <input type="hidden" class="form-control" id="id" value="{{ data.row.id }}">
+                        <input type="hidden" class="form-control" name="id" value="{{ data.row.id }}">
+                        <input type="hidden" class="form-control" name="module_id" value="{{ data.row.module_id }}">
                         <div class="form-group">
                             <label for="title" class="col-sm-2 control-label">帖子标题</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="title" placeholder="帖子标题"
-                                       value="{{ data.row.title }}">
+                                <input type="text" class="form-control" name="title" placeholder="帖子标题" value="{{ data.row.title }}">
                             </div>
                         </div>
                         
-                        <textarea name="editor" id="editor" rows="10" cols="80">
+                        <textarea name="content" id="editor" rows="10" cols="80">
                               {% if data.row.content %}
                                   {{ data.row.content }}
                               {% endif %}
@@ -36,12 +37,12 @@
                             // instance, using default configuration.
                             var ckEditor = CKEDITOR.replace('editor');
                         </script>
+                        <div class="box-footer clearfix col-md-offset-2">
+                            {% include 'common/buttons/go_back.html' %}
+                            {% include 'common/buttons/confirm.html' %}
+                        </div>
                     </form>
-
-                </div>
-                <div class="box-footer clearfix col-md-offset-2">
-                    {% include 'common/buttons/go_back.html' %}
-                    {% include 'common/buttons/confirm.html' %}
+                    {% endwith %}
                 </div>
             </div>
         </div>
