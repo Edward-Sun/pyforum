@@ -1,0 +1,38 @@
+nohup: ignoring input
+112229:C 01 Jan 2019 18:49:54.536 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+112229:C 01 Jan 2019 18:49:54.536 # Redis version=5.0.3, bits=64, commit=00000000, modified=0, pid=112229, just started
+112229:C 01 Jan 2019 18:49:54.536 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+112229:M 01 Jan 2019 18:49:54.537 # You requested maxclients of 10000 requiring at least 10032 max file descriptors.
+112229:M 01 Jan 2019 18:49:54.537 # Server can't set maximum open files to 10032 because of OS error: Operation not permitted.
+112229:M 01 Jan 2019 18:49:54.537 # Current maximum open files is 4096. maxclients has been reduced to 4064 to compensate for low ulimit. If you need higher maxclients increase 'ulimit -n'.
+112229:M 01 Jan 2019 18:49:54.538 * Running mode=standalone, port=6379.
+112229:M 01 Jan 2019 18:49:54.538 # Server initialized
+112229:M 01 Jan 2019 18:49:54.538 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+112229:M 01 Jan 2019 18:49:54.538 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+112229:M 01 Jan 2019 18:49:54.538 * DB loaded from disk: 0.000 seconds
+112229:M 01 Jan 2019 18:49:54.538 * Ready to accept connections
+112229:M 01 Jan 2019 19:01:25.159 * 100 changes in 300 seconds. Saving...
+112229:M 01 Jan 2019 19:01:25.160 * Background saving started by pid 117075
+117075:C 01 Jan 2019 19:01:25.200 * DB saved on disk
+117075:C 01 Jan 2019 19:01:25.201 * RDB: 6 MB of memory used by copy-on-write
+112229:M 01 Jan 2019 19:01:25.260 * Background saving terminated with success
+112229:M 01 Jan 2019 19:06:26.089 * 100 changes in 300 seconds. Saving...
+112229:M 01 Jan 2019 19:06:26.090 * Background saving started by pid 119162
+119162:C 01 Jan 2019 19:06:26.149 * DB saved on disk
+119162:C 01 Jan 2019 19:06:26.149 * RDB: 4 MB of memory used by copy-on-write
+112229:M 01 Jan 2019 19:06:26.207 * Background saving terminated with success
+112229:M 01 Jan 2019 19:18:39.612 * 100 changes in 300 seconds. Saving...
+112229:M 01 Jan 2019 19:18:39.612 * Background saving started by pid 124288
+124288:C 01 Jan 2019 19:18:39.653 * DB saved on disk
+124288:C 01 Jan 2019 19:18:39.653 * RDB: 6 MB of memory used by copy-on-write
+112229:M 01 Jan 2019 19:18:39.713 * Background saving terminated with success
+112229:M 01 Jan 2019 19:24:32.638 * 100 changes in 300 seconds. Saving...
+112229:M 01 Jan 2019 19:24:32.639 * Background saving started by pid 126801
+126801:C 01 Jan 2019 19:24:32.678 * DB saved on disk
+126801:C 01 Jan 2019 19:24:32.679 * RDB: 4 MB of memory used by copy-on-write
+112229:M 01 Jan 2019 19:24:32.739 * Background saving terminated with success
+112229:M 01 Jan 2019 19:40:02.591 * 100 changes in 300 seconds. Saving...
+112229:M 01 Jan 2019 19:40:02.592 * Background saving started by pid 133254
+133254:C 01 Jan 2019 19:40:02.631 * DB saved on disk
+133254:C 01 Jan 2019 19:40:02.632 * RDB: 6 MB of memory used by copy-on-write
+112229:M 01 Jan 2019 19:40:02.692 * Background saving terminated with success
