@@ -20,13 +20,15 @@ install frontend dependencies
 
 ```bash
 cd static
+sudo apt-get update
+apt-get install npm
+npm config set strict-ssl false
 npm install
 ```
 
-install and run mysql
+install and run mysql (set root password as 123456)
 
 ```bash
-sudo apt-get update
 sudo apt-get install mysql-server
 bash reload_sql.sh
 ```
