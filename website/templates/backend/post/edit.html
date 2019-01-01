@@ -1,7 +1,7 @@
 {% extends 'template.html' %}
 {% block script_header %}
     {#    script for ckeditor#}
-    <script src="{{ url_for('backend.static',filename='lib/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ url_for('backend.static', filename='lib/ckeditor/ckeditor.js') }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -41,7 +41,7 @@
                 </div>
                 <div class="box-footer clearfix col-md-offset-2">
                     {% include 'common/buttons/go_back.html' %}
-                    {% include 'common/buttons/create.html' %}
+                    {% include 'common/buttons/confirm.html' %}
                 </div>
             </div>
         </div>
@@ -55,7 +55,10 @@
     <link href="{{ url_for('backend.static', filename='node_modules/jquery-autocomplete/jquery.autocomplete.css') }}"
           rel="stylesheet">
     <script>
-        requirejs(['{{ url_for('backend.static',filename='src/backend/post/post/post.js') }}']);
+        require.config({
+            urlArgs: "bust=" + (new Date()).getTime()
+        });
+        requirejs(['{{ url_for('backend.static', filename='src/backend/post/post/post.js')}}']);
     </script>
 
 {% endblock %}
