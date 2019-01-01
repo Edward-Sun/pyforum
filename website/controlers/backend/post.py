@@ -9,9 +9,9 @@ from playhouse.flask_utils import object_list
 from website.http.paginate import FlaskPagination
 from website.http.request import Request
 from website.http.response import Response
-from website.models.post import Post, PostTag, PostTagRelate
+from website.models.post import Post
 
-__author__ = 'walker_lee'
+__author__ = 'walker_lee&edward_sun'
 
 from flask_login import login_required
 
@@ -21,41 +21,33 @@ from flask import render_template, g
 from ...blueprints import backend
 
 
-@backend.route('/posts', methods=['GET'])
+@backend.route('/module/<int:id>', methods=['GET'])
 @login_required
 @confirm_required
 @check_permission
-def post_list():
-    rows = Post.get_post_list_query()
-    return object_list('post/post/list.html', paginate=FlaskPagination(query=rows), query=rows,
-                       context_variable='rows', paginate_by=10, check_bounds=False, page_header={'title': '全部文章列表'})
+def post_list(id):
+    rows = Post.get_post_list_by_module(id)
+    return object_list('post/list.html', paginate=FlaskPagination(query=rows), query=rows,
+                       context_variable='rows', paginate_by=10, check_bounds=False, page_header={'title': '板块文章列表'})
 
-@backend.route('/tags', methods=['GET'])
+@backend.route('/posts/<int:id>/create', methods=['GET'])
 @login_required
 @confirm_required
 @check_permission
-def post_tag_list():
-    rows = PostTag.select()
-    return object_list('post/tag/list.html', paginate=FlaskPagination(query=rows), query=rows,
-                       context_variable='rows', paginate_by=10, check_bounds=False, page_header={'title': '全部版块列表'})
-
-@backend.route('/posts/create', methods=['GET'])
-@login_required
-@confirm_required
-@check_permission
-def create_post_page():
-    return render_template('post/post/post.html',
+def create_post_page(id):
+    return render_template('post/edit.html',
                            check_bounds=False,
                            page_header={'title': '创建文章'},
-                           data={'row': {}})
+                           data={'row': {'module_id':id}})
 
-@backend.route('/posts/create', methods=['POST'])
+@backend.route('/posts/<int:id>/create', methods=['POST'])
 @login_required
 @confirm_required
 @check_permission
-def create_post():
+def create_post(id):
     data = Request(request).json()
-    Post.create_post(user_id=get_user_id(), title=data['title'], content=data['content'], summary=data['summary'],tags=data['tags'])
+    print('data:', data)
+    Post.create_post(user_id=get_user_id(), title=data['title'], content=data['content'])
     return Response()
 
 @backend.route('/posts/<int:id>/edit', methods=['GET'])
@@ -66,9 +58,7 @@ def update_post_page(id):
     post = Post.get(Post.id == id)
     if not post:
         abort(404)
-    tags = PostTagRelate.get_tags_by_post_id(post_id=post.id)
-    post.tags = tags
-    return render_template('post/post/post.html',
+    return render_template('post/edit.html',
                            page_header={'title': '编辑文章'},
                            data={'row': post})
 
@@ -78,5 +68,6 @@ def update_post_page(id):
 @check_permission
 def update_post(id):
     data = Request(request).json()
-    Post.update_post(post_id=id, title=data['title'], content=data['content'], summary=data['summary'],tags=data['tags'])
+    print('data:', data)
+    Post.update_post(post_id=id, title=data['title'], content=data['content'])
     return Response()

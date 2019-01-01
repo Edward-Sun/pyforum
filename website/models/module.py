@@ -5,10 +5,10 @@ from playhouse.shortcuts import model_to_dict
 from website.app import db_wrapper
 from peewee import IntegerField, CharField, PrimaryKeyField, Model, SmallIntegerField, ForeignKeyField
 
-__author__ = 'walker_lee'
+__author__ = 'walker_lee&edward_sun'
 
 
-class ManageModule(db_wrapper.Model):
+class Module(db_wrapper.Model):
     id = PrimaryKeyField()
     parent_id = IntegerField()
     name = CharField()
@@ -17,30 +17,39 @@ class ManageModule(db_wrapper.Model):
     weight = SmallIntegerField()
 
     class Meta:
-        db_table = 'manage_module'
+        db_table = 'module'
 
     @staticmethod
-    def get_menus_and_submenus():
-        """获取菜单与子菜单"""
-        rows = [model_to_dict(row) for row in
-                ManageModule.select().order_by(ManageModule.parent_id.asc(), ManageModule.weight.desc())]
-        menus = [row for row in rows if row['parent_id'] == 0]
-        submenus = [row for row in rows if row['parent_id'] != 0]
-        return menus, submenus
+    def get_menus():
+        """获取菜单"""
+        menus = [model_to_dict(row) for row in
+                Module.select().order_by(Module.parent_id.asc(), 
+                                         Module.weight.desc())]
 
+        return menus
 
-class RoleModule(db_wrapper.Model):
-    id = PrimaryKeyField()
+    @staticmethod
+    def get_all_modules():
+        """获取所有模块id"""
+        
+        return [module for module.id in Module.select()]
+    
+class RoleUserModule(db_wrapper.Model):
     role_id = SmallIntegerField()
+    user_id = IntegerField()
     module_id = IntegerField()
 
-    # module_id = ForeignKeyField(ManageModule)
-
-
     class Meta:
-        db_table = 'role_module'
+        db_table = 'role_user_module'
 
     @staticmethod
-    def get_modules_by_role_id(role_id):
-        module_ids = [row.module_id for row in RoleModule.select().where(RoleModule.role_id == role_id)]
-        return module_ids
+    def get_role_id_by_module_and_user(module_id, user_id):
+        role_id = [row.role_id for row in 
+                   RoleUserModule.select().where(
+                       RoleUserModule.module_id == module_id,
+                       RoleUserModule.user_id == user_id
+                   )]
+        if len(role_id) > 0:
+            return role_id[0]
+        else:
+            return 20

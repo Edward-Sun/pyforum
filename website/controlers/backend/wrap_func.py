@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 from functools import wraps
 
-from flask import request,g
+from flask import request, g
 
 from website.http.main_exception import MainException
-from website.models.module import ManageModule, RoleModule
+from website.models.module import Module
 from flask_login import current_user
 
-__author__ = 'walker_lee'
+__author__ = 'walker_lee&edward_sun'
 
 
 def check_permission(f):
@@ -23,21 +23,12 @@ def check_permission(f):
 
     return decorated_function
 
-
-
-
 def init_menus():
     g.uri_path = request.path
-    menus,submenus = ManageModule.get_menus_and_submenus()
+    menus = Module.get_menus()
     g.menu = menus
-    parent_id = 0
-    for menu in submenus:
-        if request.path.startswith(menu['prefix']):
-            parent_id = menu['parent_id']
-    g.sub_menu = submenus
-    g.cur_menu = [row for row in submenus if row['parent_id'] == parent_id]
-    g.modules = RoleModule.get_modules_by_role_id(role_id=current_user.role_id)
-
+    g.cur_menu = menus
+    g.modules = Module.get_all_modules()
 
 def get_user_id():
     """获取用户id,默认是登录态"""

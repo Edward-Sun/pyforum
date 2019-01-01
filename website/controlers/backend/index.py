@@ -8,7 +8,7 @@ from flask import render_template,g
 from ...blueprints import backend
 from website.http.main_exception import MainException
 
-__author__ = 'walker_lee'
+__author__ = 'walker_lee&edward_sun'
 
 
 @backend.route('/')
@@ -16,4 +16,4 @@ __author__ = 'walker_lee'
 @confirm_required
 @check_permission
 def index():
-    return render_template('template.html',page_header={'title':'do not go gentle into good night'})
+    return render_template('template.html',page_header={'title':'PKU Forum: Best Forum in Peking University'})

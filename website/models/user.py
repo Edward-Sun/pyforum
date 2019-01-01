@@ -9,6 +9,7 @@ from website.app import db_wrapper, login_manager
 from website.http.main_exception import MainException
 from werkzeug.security import check_password_hash,generate_password_hash
 
+__author__ = 'walker_lee&edward_sun'
 
 class User(UserMixin, db_wrapper.Model):
 
@@ -21,7 +22,7 @@ class User(UserMixin, db_wrapper.Model):
 
 
     class Meta:
-        db_table = 'users'
+        db_table = 'user'
 
     def register(self,email,password,username):
         user = User(email=email, username=username, password_hash=generate_password_hash(password))
@@ -92,7 +93,6 @@ class AnonymousUser(AnonymousUserMixin):
         return False
 
 login_manager.anonymous_user = AnonymousUser
-
 
 @login_manager.user_loader
 def load_user(user_id):

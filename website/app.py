@@ -101,7 +101,7 @@ def _generate_csrf_token():
 
 def _config_sitemap(app):
     """
-    显示所有注册uri地址
+    显示所有注册url地址
     :param app:
     :return:
     """

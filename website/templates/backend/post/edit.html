@@ -1,0 +1,61 @@
+{% extends 'template.html' %}
+{% block script_header %}
+    {#    script for ckeditor#}
+    <script src="{{ url_for('backend.static',filename='lib/ckeditor/ckeditor.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                </div>
+
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form class="form-horizontal">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                        <input type="hidden" class="form-control" id="id" value="{{ data.row.id }}">
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label">帖子标题</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="title" placeholder="帖子标题"
+                                       value="{{ data.row.title }}">
+                            </div>
+                        </div>
+                        
+                        <textarea name="editor" id="editor" rows="10" cols="80">
+                              {% if data.row.content %}
+                                  {{ data.row.content }}
+                              {% endif %}
+                        </textarea>
+                        
+                        <script>
+                            // Replace the <textarea id="editor1"> with a CKEditor
+                            // instance, using default configuration.
+                            var ckEditor = CKEDITOR.replace('editor');
+                        </script>
+                    </form>
+
+                </div>
+                <div class="box-footer clearfix col-md-offset-2">
+                    {% include 'common/buttons/go_back.html' %}
+                    {% include 'common/buttons/create.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+    {#    script for autocomple#}
+    <link href="{{ url_for('backend.static', filename='node_modules/jquery-autocomplete/jquery.autocomplete.css') }}"
+          rel="stylesheet">
+    <script>
+        requirejs(['{{ url_for('backend.static',filename='src/backend/post/post/post.js') }}']);
+    </script>
+
+{% endblock %}

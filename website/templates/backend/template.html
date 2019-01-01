@@ -153,17 +153,9 @@ desired effect
                                 <i class="fa fa-link"></i>
                                 <span>{{ item.name }}</span>
                                 <span class="pull-right-container">
-                          <i class="fa fa-angle-left pull-right"></i>
-                        </span>
+                                  <i class="fa fa-angle-left pull-right"></i>
+                                </span>
                             </a>
-                            <ul class="treeview-menu">
-                                {% for sub_menu in g.sub_menu %}
-                                    {% if permission(sub_menu.id) and sub_menu.parent_id== item.id %}
-                                        <li class="{% if active_cur_menu(sub_menu.prefix) %}active{% endif %}"><a
-                                                href="{{ sub_menu.uri }}">{{ sub_menu.name }}</a></li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
                         </li>
                     {% endif %}
                 {% endfor %}

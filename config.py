@@ -33,17 +33,6 @@ OBJECT_ID_WIDTH = 10 ** 13  # 全局ID的长度
 # LOG_SILENT = True
 LOG_SILENT = False
 
-# 图片管理
-IMAGEURL = 'http://127.0.0.1:5000/v2/images'
-IMAGE_BUCKET = 'imgs_bucket'
-UPLOAD_TMP_DIR = 'tmp'
-
-# 阿里云oss配置
-OSS_ACCESS_KEY_ID = 'hNW2QKIROxHlqbDG'
-OSS_ACCESS_KEY_SECRET = 'UHxy2kEJX1D0C4onYcOjfBK22Ky7j9'
-OSS_END_POINT = 'http://oss-cn-hangzhou.aliyuncs.com'
-OSS_IMG_END_POINT = 'http://img-cn-hangzhou.aliyuncs.com'  # 图片访问域名, 用于处理图片缩放等
-
 TEMPLATES_AUTO_RELOAD =True #自动刷新html
 
 # REDIS_HOST = '139.162.78.193'
@@ -60,10 +49,7 @@ REDIS_PASSWORD = ''
 # SESSION
 SESSION_SALT = 'h\xf2\x80-\x93\x80\x9d\x8b\xdf_\t\xa4>5\xa2w\x91\xcd\xe1\x82\xdb\xde\x18\xfe'
 
-
-# app 环境模式,目前分为DEV 与PRO(线上)
 APP_MODE = 'DEV'
-
 
 # email server
 MAIL_SERVER = 'smtp.163.com'
