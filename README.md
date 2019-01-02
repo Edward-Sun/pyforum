@@ -76,3 +76,5 @@ python backend.py
 10、约束条件（不知道 sql 和 slack 里怎么搞 foreign key）
 
 11、关系模式的规范化
+
+12、阅读数更新+点赞数更新
