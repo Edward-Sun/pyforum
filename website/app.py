@@ -6,6 +6,8 @@ import random
 from enum import Enum
 
 import redis
+from babel import dates
+from datetime import datetime, timedelta, timezone
 
 import config
 from config import SESSION_SALT, MYSQL, MYSQL_NAME
@@ -60,6 +62,13 @@ def create_app(config=None, server=Server.all):
     login_manager.init_app(app)
     SentryHelper.init_app(app)
     app.jinja_env.globals['csrf_token'] = _generate_csrf_token
+    
+    def format_datetime(value):
+        format="MM-dd-y"
+        return dates.format_datetime(value, format, tzinfo=timezone.utc)
+
+    app.jinja_env.filters['date'] = format_datetime
+    
     _init_logger()
     return app
 

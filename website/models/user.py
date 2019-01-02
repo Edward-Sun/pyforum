@@ -10,6 +10,7 @@ from peewee import Model, IntegerField, CharField,PrimaryKeyField
 from website.app import db_wrapper, login_manager, db
 from website.http.main_exception import MainException
 from werkzeug.security import check_password_hash,generate_password_hash
+from datetime import datetime, timedelta, timezone
 
 __author__ = 'walker_lee&edward_sun'
 
@@ -35,7 +36,9 @@ class User(UserMixin, db_wrapper.Model):
             user = User.get(User.id == user_id)
             if not user:
                 raise MainException.NOT_FOUND
-            user.birthday = birthday
+            month, day, year = birthday.split('-')
+            timestep = int(datetime(int(year), int(month), int(day), tzinfo=timezone.utc).timestamp())
+            user.birthday = timestep
             user.gender = gender
             user.save()
     
