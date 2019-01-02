@@ -1,191 +1,93 @@
 nohup: ignoring input
-/home/szq/database/pyforum/website/models/user.py:5: ExtDeprecationWarning: Importing flask.ext.login is deprecated, use flask_login instead.
+load_component:website.controlers.backend.auth
+/home/szq/database/pyforum/website/models/user.py:7: ExtDeprecationWarning: Importing flask.ext.login is deprecated, use flask_login instead.
   from flask.ext.login import AnonymousUserMixin, UserMixin
+load_component:website.controlers.backend.auth.views
 /home/szq/database/pyforum/website/http/paginate.py:4: ExtDeprecationWarning: Importing flask.ext.paginate is deprecated, use flask_paginate instead.
   from flask.ext.paginate import Pagination
+load_component:website.controlers.backend.forum
+load_component:website.controlers.backend.index
+load_component:website.controlers.backend.init_backend
+load_component:website.controlers.backend.wrap_func
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
- * Restarting with stat
-/home/szq/database/pyforum/website/models/user.py:5: ExtDeprecationWarning: Importing flask.ext.login is deprecated, use flask_login instead.
-  from flask.ext.login import AnonymousUserMixin, UserMixin
-/home/szq/database/pyforum/website/http/paginate.py:4: ExtDeprecationWarning: Importing flask.ext.paginate is deprecated, use flask_paginate instead.
-  from flask.ext.paginate import Pagination
- * Debugger is active!
- * Debugger pin code: 669-680-513
 No connection available in pool.
-Created new connection 140172596082056.
-('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed` FROM `users` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
-('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`uri`, `t1`.`prefix`, `t1`.`weight` FROM `manage_module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
-('SELECT `t1`.`id`, `t1`.`role_id`, `t1`.`module_id` FROM `role_module` AS t1 WHERE (`t1`.`role_id` = %s)', [0])
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:10] "GET / HTTP/1.1" 200 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:11] "GET /node_modules/admin-lte/bootstrap/css/bootstrap.min.css HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:11] "GET /node_modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:11] "GET /node_modules/admin-lte/bootstrap/js/bootstrap.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:11] "GET /node_modules/admin-lte/dist/js/app.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:11] "GET /node_modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:11] "GET /node_modules/admin-lte/bootstrap/js/bootstrap.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:11] "GET /node_modules/admin-lte/dist/js/app.min.js HTTP/1.1" 404 -
-('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed` FROM `users` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
-('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`uri`, `t1`.`prefix`, `t1`.`weight` FROM `manage_module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
-('SELECT `t1`.`id`, `t1`.`role_id`, `t1`.`module_id` FROM `role_module` AS t1 WHERE (`t1`.`role_id` = %s)', [0])
-('SELECT COUNT(1) FROM (SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`summary`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor`, GROUP_CONCAT(`t2`.`tag_name`) AS tags FROM `post` AS t1 LEFT OUTER JOIN `post_tag_relate` AS t2 ON (`t1`.`id` = `t2`.`post_id`) GROUP BY `t1`.`id`) AS wrapped_select', [])
-('SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`summary`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor`, GROUP_CONCAT(`t2`.`tag_name`) AS tags FROM `post` AS t1 LEFT OUTER JOIN `post_tag_relate` AS t2 ON (`t1`.`id` = `t2`.`post_id`) GROUP BY `t1`.`id` LIMIT 10 OFFSET 0', [])
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:13] "GET /posts HTTP/1.1" 200 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:13] "GET /node_modules/admin-lte/bootstrap/css/bootstrap.min.css HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:13] "GET /node_modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:13] "GET /node_modules/admin-lte/bootstrap/js/bootstrap.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:13] "GET /node_modules/admin-lte/dist/js/app.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:13] "GET /node_modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:13] "GET /node_modules/admin-lte/bootstrap/js/bootstrap.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:13] "GET /node_modules/admin-lte/dist/js/app.min.js HTTP/1.1" 404 -
-('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed` FROM `users` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
-('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`uri`, `t1`.`prefix`, `t1`.`weight` FROM `manage_module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
-('SELECT `t1`.`id`, `t1`.`role_id`, `t1`.`module_id` FROM `role_module` AS t1 WHERE (`t1`.`role_id` = %s)', [0])
-('SELECT COUNT(1) FROM (SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`summary`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor`, GROUP_CONCAT(`t2`.`tag_name`) AS tags FROM `post` AS t1 LEFT OUTER JOIN `post_tag_relate` AS t2 ON (`t1`.`id` = `t2`.`post_id`) GROUP BY `t1`.`id`) AS wrapped_select', [])
-('SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`summary`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor`, GROUP_CONCAT(`t2`.`tag_name`) AS tags FROM `post` AS t1 LEFT OUTER JOIN `post_tag_relate` AS t2 ON (`t1`.`id` = `t2`.`post_id`) GROUP BY `t1`.`id` LIMIT 10 OFFSET 0', [])
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:14] "GET /posts HTTP/1.1" 200 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:14] "GET /node_modules/admin-lte/bootstrap/css/bootstrap.min.css HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:14] "GET /node_modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:14] "GET /node_modules/admin-lte/bootstrap/js/bootstrap.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:14] "GET /node_modules/admin-lte/dist/js/app.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:14] "GET /node_modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:14] "GET /node_modules/admin-lte/bootstrap/js/bootstrap.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:14] "GET /node_modules/admin-lte/dist/js/app.min.js HTTP/1.1" 404 -
-('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed` FROM `users` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
-('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`uri`, `t1`.`prefix`, `t1`.`weight` FROM `manage_module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
-('SELECT `t1`.`id`, `t1`.`role_id`, `t1`.`module_id` FROM `role_module` AS t1 WHERE (`t1`.`role_id` = %s)', [0])
-('SELECT Count(*) FROM `post_tag` AS t1', [])
-('SELECT `t1`.`id`, `t1`.`tag_name`, `t1`.`visit_count`, `t1`.`created_at` FROM `post_tag` AS t1 LIMIT 10 OFFSET 0', [])
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /tags HTTP/1.1" 200 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/bootstrap/css/bootstrap.min.css HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/bootstrap/js/bootstrap.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/dist/js/app.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/bootstrap/js/bootstrap.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/dist/js/app.min.js HTTP/1.1" 404 -
-('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed` FROM `users` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
-('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`uri`, `t1`.`prefix`, `t1`.`weight` FROM `manage_module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
-('SELECT `t1`.`id`, `t1`.`role_id`, `t1`.`module_id` FROM `role_module` AS t1 WHERE (`t1`.`role_id` = %s)', [0])
-('SELECT COUNT(1) FROM (SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`summary`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor`, GROUP_CONCAT(`t2`.`tag_name`) AS tags FROM `post` AS t1 LEFT OUTER JOIN `post_tag_relate` AS t2 ON (`t1`.`id` = `t2`.`post_id`) GROUP BY `t1`.`id`) AS wrapped_select', [])
-('SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`summary`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor`, GROUP_CONCAT(`t2`.`tag_name`) AS tags FROM `post` AS t1 LEFT OUTER JOIN `post_tag_relate` AS t2 ON (`t1`.`id` = `t2`.`post_id`) GROUP BY `t1`.`id` LIMIT 10 OFFSET 0', [])
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /posts HTTP/1.1" 200 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/bootstrap/css/bootstrap.min.css HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/bootstrap/js/bootstrap.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/dist/js/app.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:15] "GET /node_modules/admin-lte/bootstrap/js/bootstrap.min.js HTTP/1.1" 404 -
-Returning 140172596082056 to pool.
-127.0.0.1 - - [01/Jan/2019 20:43:16] "GET /node_modules/admin-lte/dist/js/app.min.js HTTP/1.1" 404 -
- * Detected change in '/home/szq/database/pyforum/config.py', reloading
-load_component:website.controlers.backend.auth
-load_component:website.controlers.backend.auth.views
-load_component:website.controlers.backend.index
-load_component:website.controlers.backend.init_backend
-load_component:website.controlers.backend.post
-load_component:website.controlers.backend.upload
-load_component:website.controlers.backend.wrap_func
- * Restarting with stat
-/home/szq/database/pyforum/website/models/user.py:5: ExtDeprecationWarning: Importing flask.ext.login is deprecated, use flask_login instead.
-  from flask.ext.login import AnonymousUserMixin, UserMixin
-/home/szq/database/pyforum/website/http/paginate.py:4: ExtDeprecationWarning: Importing flask.ext.paginate is deprecated, use flask_paginate instead.
-  from flask.ext.paginate import Pagination
- * Debugger is active!
- * Debugger pin code: 669-680-513
- * Detected change in '/home/szq/database/pyforum/website/app.py', reloading
-load_component:website.controlers.backend.auth
-load_component:website.controlers.backend.auth.views
-load_component:website.controlers.backend.index
-load_component:website.controlers.backend.init_backend
-load_component:website.controlers.backend.post
-load_component:website.controlers.backend.upload
-load_component:website.controlers.backend.wrap_func
- * Restarting with stat
-/home/szq/database/pyforum/website/models/user.py:5: ExtDeprecationWarning: Importing flask.ext.login is deprecated, use flask_login instead.
-  from flask.ext.login import AnonymousUserMixin, UserMixin
-/home/szq/database/pyforum/website/http/paginate.py:4: ExtDeprecationWarning: Importing flask.ext.paginate is deprecated, use flask_paginate instead.
-  from flask.ext.paginate import Pagination
- * Debugger is active!
- * Debugger pin code: 669-680-513
- * Detected change in '/home/szq/database/pyforum/config.py', reloading
-load_component:website.controlers.backend.auth
-load_component:website.controlers.backend.auth.views
-load_component:website.controlers.backend.index
-load_component:website.controlers.backend.init_backend
-load_component:website.controlers.backend.post
-load_component:website.controlers.backend.upload
-load_component:website.controlers.backend.wrap_func
- * Restarting with stat
-/home/szq/database/pyforum/website/models/user.py:5: ExtDeprecationWarning: Importing flask.ext.login is deprecated, use flask_login instead.
-  from flask.ext.login import AnonymousUserMixin, UserMixin
-/home/szq/database/pyforum/website/http/paginate.py:4: ExtDeprecationWarning: Importing flask.ext.paginate is deprecated, use flask_paginate instead.
-  from flask.ext.paginate import Pagination
-load_component:website.controlers.backend.auth
-load_component:website.controlers.backend.auth.views
-load_component:website.controlers.backend.index
-load_component:website.controlers.backend.init_backend
-load_component:website.controlers.backend.post
-Traceback (most recent call last):
-  File "backend.py", line 11, in <module>
-    app = create_app(config, server=Server.backend)
-  File "/home/szq/database/pyforum/website/app.py", line 56, in create_app
-    init_blueprint(app, server)
-  File "/home/szq/database/pyforum/website/app.py", line 69, in init_blueprint
-    blueprints.init_backend(app, server=server)
-  File "/home/szq/database/pyforum/website/blueprints.py", line 40, in init_backend
-    from website.controlers.backend.init_backend import init as _init_backend
-  File "/home/szq/database/pyforum/website/controlers/backend/__init__.py", line 11, in <module>
-    __import__(modname)
-  File "/home/szq/database/pyforum/website/controlers/backend/upload.py", line 11, in <module>
-    from website.helper.oss_helper import  upload_image as oss_upload_image
-  File "/home/szq/database/pyforum/website/helper/oss_helper.py", line 13, in <module>
-    from website.models.photo import Photo
-  File "/home/szq/database/pyforum/website/models/photo.py", line 14, in <module>
-    from website.util.oss import oss_manager
-ModuleNotFoundError: No module named 'website.util.oss'
-load_component:website.controlers.backend.auth
-load_component:website.controlers.backend.auth.views
-load_component:website.controlers.backend.index
-load_component:website.controlers.backend.init_backend
-load_component:website.controlers.backend.post
-load_component:website.controlers.backend.upload
-load_component:website.controlers.backend.wrap_func
+Created new connection 140104093916016.
+('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed`, `t1`.`birthday`, `t1`.`gender`, `t1`.`level`, `t1`.`register_date` FROM `user` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1', [])
+Returning 140104093916016 to pool.
+127.0.0.1 - - [02/Jan/2019 22:19:36] "GET / HTTP/1.1" 200 -
+('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed`, `t1`.`birthday`, `t1`.`gender`, `t1`.`level`, `t1`.`register_date` FROM `user` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1', [])
+Returning 140104093916016 to pool.
+127.0.0.1 - - [02/Jan/2019 22:19:36] "GET / HTTP/1.1" 200 -
+('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed`, `t1`.`birthday`, `t1`.`gender`, `t1`.`level`, `t1`.`register_date` FROM `user` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1', [])
+Returning 140104093916016 to pool.
+127.0.0.1 - - [02/Jan/2019 22:19:36] "GET / HTTP/1.1" 200 -
+('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed`, `t1`.`birthday`, `t1`.`gender`, `t1`.`level`, `t1`.`register_date` FROM `user` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
+('SELECT Count(*) FROM `post` AS t1 WHERE (`t1`.`module_id` = %s)', [1])
+('SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`module_id`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor` FROM `post` AS t1 WHERE (`t1`.`module_id` = %s) LIMIT 10 OFFSET 0', [1])
+Returning 140104093916016 to pool.
+127.0.0.1 - - [02/Jan/2019 22:19:38] "GET /module/1 HTTP/1.1" 200 -
+('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed`, `t1`.`birthday`, `t1`.`gender`, `t1`.`level`, `t1`.`register_date` FROM `user` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [2])
+('SELECT Count(*) FROM `post` AS t1 WHERE (`t1`.`module_id` = %s)', [2])
+('SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`module_id`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor` FROM `post` AS t1 WHERE (`t1`.`module_id` = %s) LIMIT 10 OFFSET 0', [2])
+Returning 140104093916016 to pool.
+127.0.0.1 - - [02/Jan/2019 22:19:38] "GET /module/2 HTTP/1.1" 200 -
+('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed`, `t1`.`birthday`, `t1`.`gender`, `t1`.`level`, `t1`.`register_date` FROM `user` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [4])
+('SELECT Count(*) FROM `post` AS t1 WHERE (`t1`.`module_id` = %s)', [4])
+('SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`module_id`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor` FROM `post` AS t1 WHERE (`t1`.`module_id` = %s) LIMIT 10 OFFSET 0', [4])
+Returning 140104093916016 to pool.
+127.0.0.1 - - [02/Jan/2019 22:19:39] "GET /module/4 HTTP/1.1" 200 -
+('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed`, `t1`.`birthday`, `t1`.`gender`, `t1`.`level`, `t1`.`register_date` FROM `user` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [5])
+('SELECT Count(*) FROM `post` AS t1 WHERE (`t1`.`module_id` = %s)', [5])
+('SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`module_id`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor` FROM `post` AS t1 WHERE (`t1`.`module_id` = %s) LIMIT 10 OFFSET 0', [5])
+Returning 140104093916016 to pool.
+127.0.0.1 - - [02/Jan/2019 22:19:40] "GET /module/5 HTTP/1.1" 200 -
+('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed`, `t1`.`birthday`, `t1`.`gender`, `t1`.`level`, `t1`.`register_date` FROM `user` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [7])
+('SELECT Count(*) FROM `post` AS t1 WHERE (`t1`.`module_id` = %s)', [7])
+('SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`module_id`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor` FROM `post` AS t1 WHERE (`t1`.`module_id` = %s) LIMIT 10 OFFSET 0', [7])
+Returning 140104093916016 to pool.
+127.0.0.1 - - [02/Jan/2019 22:19:40] "GET /module/7 HTTP/1.1" 200 -
+('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed`, `t1`.`birthday`, `t1`.`gender`, `t1`.`level`, `t1`.`register_date` FROM `user` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [6])
+('SELECT Count(*) FROM `post` AS t1 WHERE (`t1`.`module_id` = %s)', [6])
+('SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`module_id`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor` FROM `post` AS t1 WHERE (`t1`.`module_id` = %s) LIMIT 10 OFFSET 0', [6])
+Returning 140104093916016 to pool.
+127.0.0.1 - - [02/Jan/2019 22:19:42] "GET /module/6 HTTP/1.1" 200 -
+('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed`, `t1`.`birthday`, `t1`.`gender`, `t1`.`level`, `t1`.`register_date` FROM `user` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [5])
+('SELECT Count(*) FROM `post` AS t1 WHERE (`t1`.`module_id` = %s)', [5])
+('SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`module_id`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor` FROM `post` AS t1 WHERE (`t1`.`module_id` = %s) LIMIT 10 OFFSET 0', [5])
+Returning 140104093916016 to pool.
+127.0.0.1 - - [02/Jan/2019 22:19:42] "GET /module/5 HTTP/1.1" 200 -
+('SELECT `t1`.`id`, `t1`.`email`, `t1`.`username`, `t1`.`password_hash`, `t1`.`role_id`, `t1`.`confirmed`, `t1`.`birthday`, `t1`.`gender`, `t1`.`level`, `t1`.`register_date` FROM `user` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [1])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 ORDER BY `t1`.`parent_id` ASC, `t1`.`weight` DESC', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1', [])
+('SELECT `t1`.`id`, `t1`.`parent_id`, `t1`.`name`, `t1`.`url`, `t1`.`prefix`, `t1`.`weight` FROM `module` AS t1 WHERE (`t1`.`id` = %s) LIMIT 1 OFFSET 0', [4])
+('SELECT Count(*) FROM `post` AS t1 WHERE (`t1`.`module_id` = %s)', [4])
+('SELECT `t1`.`id`, `t1`.`title`, `t1`.`user_id`, `t1`.`module_id`, `t1`.`content`, `t1`.`created_at`, `t1`.`updated_at`, `t1`.`posted_at`, `t1`.`read_count`, `t1`.`like_count`, `t1`.`comment_floor` FROM `post` AS t1 WHERE (`t1`.`module_id` = %s) LIMIT 10 OFFSET 0', [4])
+Returning 140104093916016 to pool.
+127.0.0.1 - - [02/Jan/2019 22:19:43] "GET /module/4 HTTP/1.1" 200 -
