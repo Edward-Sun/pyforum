@@ -1,9 +1,10 @@
+import config
 from faker import Faker
 fake = Faker("zh_CN")
 
 import random
 with open('add_fake_data.sql', 'w') as fout:
-    fout.write("USE pyforum;\n")
+    fout.write("USE "+config.MYSQL_NAME+";\n")
     for i in range(100):
         fout.write("INSERT INTO `user` (`username`,`email`,`password_hash`,`confirmed`,`register_date`)\
 VALUES ('user"+str(i)+"', 'qq"+str(i)+"@qq.com',\
