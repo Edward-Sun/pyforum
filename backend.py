@@ -10,4 +10,4 @@ __author__ = 'walker_lee'
 
 app = create_app(config, server=Server.backend)
 if __name__ == '__main__':
-    app.run()
+    app.run(port=config.FLASK_PORT)

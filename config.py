@@ -16,9 +16,11 @@ WWW_URL_PREFIX = '/www'
 ADMIN_URL_PREFIX = ''
 M_URL_PREFIX = '/m'
 
+FLASK_PORT = 5000
+
 # 服务器地址
-M_ADDRESS = 'http://localhost:5000/m/'
-API_ADDRESS = 'http://localhost:5000/v2/api'
+M_ADDRESS = 'http://localhost:'+str(FLASK_PORT)+'/m/'
+API_ADDRESS = 'http://localhost:'+str(FLASK_PORT)+'/v2/api'
 
 SUPER_ADMIN = ('admin', 'admin')
 
