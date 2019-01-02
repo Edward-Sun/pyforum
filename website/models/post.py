@@ -24,20 +24,6 @@ class Post(db_wrapper.Model):
 
     class Meta:
         db_table = 'post'
-
-    @staticmethod
-    def get_post(id):
-        """获取帖子"""
-        post = Post.get(Post.id == id)
-        return post
-        
-    @staticmethod
-    def get_post_title(id):
-        """获取帖子标题"""
-        post = Post.get(Post.id == id)
-        if not post:
-            raise MainException.NOT_FOUND
-        return post.title
         
     @staticmethod
     def get_and_update_post_floor(post_id):

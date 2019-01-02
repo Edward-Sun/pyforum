@@ -1,0 +1,60 @@
+{% extends 'template.html' %}
+{% block script_header %}
+    {#    script for ckeditor#}
+    <script src="{{ url_for('backend.static', filename='lib/ckeditor/ckeditor.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                </div>
+
+                <!-- /.box-header -->
+                <div class="box-body">
+                    {% with url='backend.'+page_header['method'], params={'id': page_header['id']} %}
+                    <form class="form-horizontal" action = "{{ url_for(url, **(params or {})) }}" method = "post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                        <input type="hidden" class="form-control" name="id" value="{{ data.row.id }}">
+
+                        <div class="form-group">
+                            <label for="birthday" class="col-sm-2 control-label">生日</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="birthday" placeholder="生日" value="{{ data.row.birthday }}">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gender" class="col-sm-2 control-label">性别</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="gender" placeholder=性别 value="{{ data.row.gender }}">
+                            </div>
+                        </div>
+
+                        <div class="box-footer clearfix col-md-offset-2">
+                            {% include 'common/buttons/go_back.html' %}
+                            {% include 'common/buttons/confirm.html' %}
+                        </div>
+                    </form>
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+    {#    script for autocomple#}
+    <link href="{{ url_for('backend.static', filename='node_modules/jquery-autocomplete/jquery.autocomplete.css') }}"
+          rel="stylesheet">
+    <script>
+        require.config({
+            urlArgs: "bust=" + (new Date()).getTime()
+        });
+        requirejs(['{{ url_for('backend.static', filename='src/backend/post/post/post.js')}}']);
+    </script>
+
+{% endblock %}

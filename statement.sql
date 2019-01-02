@@ -8,20 +8,24 @@ USE pyforum;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` varchar(64) DEFAULT NULL,
-  `email` varchar(64) DEFAULT NULL,
+  `username` varchar(64) NOT NULL,
+  `email` varchar(64) NOT NULL,
   `password_hash` varchar(128) DEFAULT NULL,
-  `role_id` SMALLINT(4)  DEFAULT 0 NOT NULL COMMENT '角色id',
+  `role_id` SMALLINT(4) DEFAULT 0 NOT NULL COMMENT '角色id',
   `confirmed` tinyint(1) unsigned DEFAULT '0',
+  `birthday` int unsigned DEFAULT NULL COMMENT '生日',
+  `gender` varchar(64) DEFAULT NULL COMMENT '性别',
+  `level` int(10) unsigned DEFAULT 1 COMMENT '用户等级',
+  `register_date` int unsigned DEFAULT NULL COMMENT '注册时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `ix_users_email` (`email`),
   UNIQUE KEY `ix_users_username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT = '用户表';
 
-INSERT INTO `user` (`username`,`email`,`password_hash`,`confirmed`)
-    VALUES ('szq', '569342215@qq.com', 'pbkdf2:sha1:1000$sheKmza5$95de7e0052f2dd2b533570a8c6850fee9a0c9ea4', '1');
-INSERT INTO `user` (`username`,`email`,`password_hash`,`confirmed`)
-    VALUES ('szq2', '569342216@qq.com', 'pbkdf2:sha1:1000$sheKmza5$95de7e0052f2dd2b533570a8c6850fee9a0c9ea4', '1');
+INSERT INTO `user` (`username`,`email`,`password_hash`,`confirmed`,`register_date`)
+    VALUES ('szq', '569342215@qq.com', 'pbkdf2:sha1:1000$sheKmza5$95de7e0052f2dd2b533570a8c6850fee9a0c9ea4', '1', UNIX_TIMESTAMP());
+INSERT INTO `user` (`username`,`email`,`password_hash`,`confirmed`,`register_date`)
+    VALUES ('szq2', '569342216@qq.com', 'pbkdf2:sha1:1000$sheKmza5$95de7e0052f2dd2b533570a8c6850fee9a0c9ea4', '1', UNIX_TIMESTAMP());
 
 -- ----------------------------
 --  Table structure for `module`

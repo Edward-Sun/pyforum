@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import time
+
 import peewee
 from flask import current_app,abort
 from flask.ext.login import AnonymousUserMixin, UserMixin
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from peewee import Model, IntegerField, CharField,PrimaryKeyField
-from website.app import db_wrapper, login_manager
+from website.app import db_wrapper, login_manager, db
 from website.http.main_exception import MainException
 from werkzeug.security import check_password_hash,generate_password_hash
 
@@ -19,13 +21,27 @@ class User(UserMixin, db_wrapper.Model):
     password_hash = CharField()
     role_id = IntegerField()
     confirmed = IntegerField()
-
-
+    birthday = IntegerField()
+    gender = CharField()
+    level = IntegerField()
+    register_date = IntegerField()
+    
     class Meta:
         db_table = 'user'
-
-    def register(self,email,password,username):
-        user = User(email=email, username=username, password_hash=generate_password_hash(password))
+    
+    @staticmethod
+    def update_profile(user_id, birthday, gender):
+        with db.transaction():
+            user = User.get(User.id == user_id)
+            if not user:
+                raise MainException.NOT_FOUND
+            user.birthday = birthday
+            user.gender = gender
+            user.save()
+    
+    def register(self, email, password, username):
+        now = time.time()
+        user = User(email=email, username=username, password_hash=generate_password_hash(password), register_date=now)
         try:
             user.save()
         except peewee.IntegrityError as err:

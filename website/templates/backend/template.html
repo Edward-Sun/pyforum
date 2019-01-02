@@ -123,9 +123,11 @@ desired effect
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">
+                                    {% with url='backend.user_profile_page', params={'id': 0} %}
+                                    <a href="{{ url_for(url, **(params or {})) }}" class="btn btn-default btn-flat">
                                         Profile
                                     </a>
+                                    {% endwith %}
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ url_for('backend.logout') }}" class="btn btn-default btn-flat">

@@ -20,14 +20,6 @@ class Module(db_wrapper.Model):
         db_table = 'module'
     
     @staticmethod
-    def get_module_name(id):
-        """获取板块名字"""
-        module = Module.get(Module.id == id)
-        if not module:
-            raise MainException.NOT_FOUND
-        return module.name
-    
-    @staticmethod
     def get_menus():
         """获取菜单"""
         menus = [model_to_dict(row) for row in

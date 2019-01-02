@@ -1,0 +1,51 @@
+{% extends 'template.html' %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <!-- /.以下是原帖 -->
+                <div class="box-body">
+                    <div class="panel panel-default">
+                    <div class="panel-heading">
+                    <table class="table table-bordered">
+                        <tbody>                        
+                            <tr>
+                                <th class="col-sm-1 sorttable-nosort">ID</th>
+                                <th class="col-sm-1 sorttable-nosort">昵称</th>
+                                <th class="col-sm-1 sorttable-nosort">邮箱</th>
+                                <th class="col-sm-1 sorttable-nosort">注册时间</th>
+                                <th class="col-sm-1 sorttable-nosort">生日</th>
+                                <th class="col-sm-1 sorttable-nosort">性别</th>
+                                <th class="col-sm-1 sorttable-nosort">等级</th>
+                                <th class="col-sm-2 sorttable-nosort">操作</th>
+                            </tr>                        
+                            <tr data-id="{{ data.row.id }}" class="icon-tr">
+                                <td>{{ data.row.id }}</td>
+                                <td>{{ data.row.username }}</td>
+                                <td>{{ data.row.email }}</td>
+                                <td>{{ data.row.register_date|datetime }}</td>
+                                <td>{{ data.row.birthday }}</td>
+                                <td>{{ data.row.gender }}</td>
+                                <td>{{ data.row.level }}</td>
+                                <td>                                  
+                                    {# TODO 只有作者和管理员才能编辑 #}                          
+                                    {% with url='backend.update_user_page', params={'id': data.row.id} %}
+                                        <a href="{{ url_for(url,**(params or {})) }}"
+                                           type="button"
+                                           class="btn btn-info btn-sm"
+                                           title="">编辑</a>
+                                    {% endwith %} 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}
