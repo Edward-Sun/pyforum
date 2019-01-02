@@ -33,7 +33,7 @@ def post_list(id):
     
     return object_list('post/list.html', paginate=FlaskPagination(query=rows), query=rows,
                        context_variable='rows', paginate_by=10, check_bounds=False,
-                       page_header={'title': module_name+' 文章列表', 'id': id})
+                       page_header={'title': module_name+' 帖子列表', 'id': id})
 
 @backend.route('/posts/<int:id>/create', methods=['GET', 'POST'])
 @login_required
@@ -53,7 +53,7 @@ def create_post_page(id):
     else:
         return render_template('post/edit.html',
                                check_bounds=False,
-                               page_header={'title': '创建文章', 'id':id, 'method':'create_post_page'},
+                               page_header={'title': '创建帖子', 'id':id, 'method':'create_post_page'},
                                data={'row': {'module_id':id}})
 
 @backend.route('/posts/<int:id>/edit', methods=['GET', 'POST'])
@@ -79,7 +79,7 @@ def update_post_page(id):
         if not post:
             abort(404)
         return render_template('post/edit.html',
-                               page_header={'title': '编辑文章', 'id':id, 'method':'update_post_page'},
+                               page_header={'title': '编辑帖子', 'id':id, 'method':'update_post_page'},
                                data={'row': post})
     
 
