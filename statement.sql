@@ -1,6 +1,3 @@
-DROP DATABASE IF EXISTS `pyforum`;
-CREATE DATABASE `pyforum`;
-USE pyforum;
 
 -- ----------------------------
 --  Table structure for `users`
