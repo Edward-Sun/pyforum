@@ -13,6 +13,7 @@ from website.models.user import User
 from website.models.post import Post
 from website.models.module import Module
 from website.models.reply import Reply
+from website.models.role import Role
 
 __author__ = 'walker_lee&edward_sun'
 
@@ -29,6 +30,7 @@ from ...blueprints import backend
 @confirm_required
 @check_permission
 def post_list(id):
+    user_id = get_user_id()
     rows = Post.get_post_list_by_module(id)
     
     module = Module.get(Module.id == id)
@@ -37,9 +39,12 @@ def post_list(id):
     
     module_name = module.name
     
+    role = Role.get_role(user_id, id)
+    
     return object_list('post/list.html', paginate=FlaskPagination(query=rows), query=rows,
                        context_variable='rows', paginate_by=10, check_bounds=False,
-                       page_header={'title': module_name+' 帖子列表', 'id': id, 'current_user':get_user_id()})
+                       page_header={'title': module_name+' 帖子列表', 'id': id,
+                                    'current_user': user_id, 'role': role})
 
 @backend.route('/post/<int:id>/delete', methods=['GET'])
 @login_required
@@ -48,6 +53,8 @@ def post_list(id):
 def delete_post(id):
     post = Post.get(Post.id == id)
     module_id = post.module_id
+    for reply in Reply.get_reply_list_by_post(post_id):
+        reply.delete_instance()
     post.delete_instance()
     return post_list(module_id)
 
@@ -122,12 +129,16 @@ def view_post_page(id):
     
     post.add_view()
     
+    module_id = post.module_id
     post_title = post.title
     user_id = post.user_id
     like_count = post.like_count
     posted_at = post.posted_at
     updated_at = post.updated_at
     content = post.content
+    
+    role = Role.get_role(get_user_id(), module_id)
+    
     return object_list('post/view.html', paginate=FlaskPagination(query=rows), query=rows,
                        context_variable='rows', paginate_by=100, check_bounds=False,
                        page_header={'title': post_title, 'id': id,
@@ -135,7 +146,9 @@ def view_post_page(id):
                                     'like_count': like_count,
                                     'posted_at': posted_at,
                                     'updated_at': updated_at,
-                                    'content': content, 'current_user':get_user_id()})
+                                    'content': content,
+                                    'current_user': get_user_id(),
+                                    'role': role})
 
 @backend.route('/reply/<int:id>/delete', methods=['GET'])
 @login_required
@@ -211,8 +224,12 @@ def user_profile_page(id):
     print('User Info')
     if not user:
         abort(404)
+        
+    role = Role.get_role(get_user_id(), 0)
+        
     return render_template('user/profile.html',
-                           page_header={'title': '用户信息: ' + user.username, 'id':id, 'current_user':get_user_id()}, 
+                           page_header={'title': '用户信息: ' + user.username, 'id':id, 
+                                        'current_user':get_user_id(), 'role': role}, 
                            data={'row': user})
 
 @backend.route('/user/<int:id>/edit', methods=['GET', 'POST'])

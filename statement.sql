@@ -51,18 +51,20 @@ insert into module(parent_id,name,url,weight) values(0,'版块2','/module/2',800
 insert into module(parent_id,name,url,weight) values(0,'版块3','/module/3',700);
 
 #角色用户模块表 -----开始
-DROP TABLE IF EXISTS `role_user_module`;
-CREATE TABLE `role_user_module` (
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
+  `id`        INT(10) UNSIGNED     NOT NULL AUTO_INCREMENT,
   `role_id`   SMALLINT(4) UNSIGNED NOT NULL DEFAULT 20
   COMMENT '用户角色id, 20:普通用户, 256:管理员',
   `user_id` INT(10) UNSIGNED NOT NULL
   COMMENT '用户id',
   `module_id` INT(10) UNSIGNED NOT NULL
   COMMENT '模块id',
-  UNIQUE KEY `i_role_user_module` (`role_id`, `user_id`, `module_id`)
+  UNIQUE KEY `i_user_module` (`user_id`, `module_id`),
+  PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT = '角色-用户-模块表';
 
-INSERT INTO `role_user_module` (`role_id`,`user_id`,`module_id`) VALUES (256,1,0), (0,2,1), (256,2,2);
+INSERT INTO `role` (`role_id`,`user_id`,`module_id`) VALUES (256,1,0), (0,2,1), (256,2,2);
 #角色用户模块表 -----结束
 
 

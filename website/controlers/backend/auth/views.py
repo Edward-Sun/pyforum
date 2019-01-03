@@ -24,10 +24,11 @@ def login():
     if (request.method == 'POST'):  # 提交表单
         data = Request(request).json()
         email = data['email']
-        try:
-            user = User.get(User.email == email)
-        except User.DoesNotExist:
+        user = User.select().where(User.email == email)
+        if len(user) == 0:
             raise MainException.EMAIL_OR_PASSWORD_ERROR
+        else:
+            user = user[0]
         if user and user.verify_password(data['password']):  # 验证密码
             login_user(user)
             return Response()

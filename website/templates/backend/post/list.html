@@ -55,7 +55,7 @@
                                            title="">查看</a>
                                     {% endwith %}
                                     
-                                    {% if page_header['current_user'] == row.user_id %}                       
+                                    {% if page_header['current_user'] == row.user_id or page_header['role'] == 256%}                       
                                         {% with url='backend.update_post_page', params={'id': row.id} %}
                                             {% include 'common/buttons/edit_button.html' %}
                                         {% endwith %}       

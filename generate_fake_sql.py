@@ -18,10 +18,11 @@ VALUES ('user"+str(i)+"', 'qq"+str(i)+"@qq.com',\
     for i in range(200):
         user_id = random.randint(1,101)
         module_id = random.randint(3,7)
+        read_count = random.randint(0,100)
         fout.write("INSERT INTO `post` (`title`,`user_id`,`module_id`,`content`, \
-`created_at`,`posted_at`,`updated_at`) \
+`created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`) \
 VALUES ('测试"+str(i)+"标题:"+''.join(fake.words(nb=3))+"',"+str(user_id)+","+str(module_id)+",'测试"+str(i)+"内容:"+fake.text(max_nb_chars=50)+"',\
-UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP());\n")
+UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),"+str(read_count)+","+str(random.randint(0,read_count))+");\n")
     
     floor_num = {}
     for i in range(2,201):

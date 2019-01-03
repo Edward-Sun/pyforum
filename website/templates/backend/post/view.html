@@ -35,7 +35,7 @@
                                 <td>{{ page_header['posted_at']|datetime }}</td>
                                 <td>{{ page_header['updated_at']|datetime }}</td>
                                 <td>                                  
-                                    {% if page_header['current_user'] == page_header['user_id'] %}                           
+                                    {% if page_header['current_user'] == page_header['user_id'] or page_header['role'] == 256 %}
                                         {% with url='backend.update_post_page', params={'id': page_header['id']} %}
                                             {% include 'common/buttons/edit_button.html' %}
                                         {% endwith %} 
@@ -82,7 +82,7 @@
                                 <td>{{ row.posted_at|datetime }}</td>
                                 <td>{{ row.updated_at|datetime }}</td>
                                 <td>                                  
-                                    {% if page_header['current_user'] == row.user_id %}
+                                    {% if page_header['current_user'] == row.user_id or page_header['role'] == 256%}
                                         {% with url='backend.update_reply_page', params={'id': row.id} %}
                                             {% include 'common/buttons/edit_button.html' %}
                                         {% endwith %} 

@@ -28,7 +28,7 @@
                                 <td>{{ data.row.gender }}</td>
                                 <td>{{ data.row.level }}</td>
                                 <td>                                  
-                                    {% if page_header['current_user'] == data.row.id %}                     
+                                    {% if page_header['current_user'] == data.row.id or page_header['role'] == 256%}                     
                                         {% with url='backend.update_user_page', params={ 'id': data.row.id } %}
                                             {% include 'common/buttons/edit_button.html' %}
                                         {% endwith %}
