@@ -35,7 +35,13 @@
                             <tr data-id="{{ row.id }}" class="icon-tr">
                                 <td>{{ row.id }}</td>
                                 <td>{{ row.title }}</td>
-                                <td>{{ row.user_id }}</td>
+                                <td>
+                                {% with url='backend.user_profile_page', params={'id': row.user_id} %}
+                                <a href="{{ url_for(url, **(params or {})) }}">
+                                    {{ row.user_id }}
+                                </a>
+                                {% endwith %}
+                                </td>
                                 <td>{{ row.comment_floor }}</td>
                                 <td>{{ row.read_count }}</td>
                                 <td>{{ row.like_count }}</td>

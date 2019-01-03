@@ -25,7 +25,12 @@
                             <tr data-id="{{ page_header['id'] }}" class="icon-tr">
                                 <td>{{ 1 }}</td>
                                 <td>{{ page_header['id'] }}</td>
-                                <td>{{ page_header['user_id'] }}</td>
+                                <td>
+                                {% with url='backend.user_profile_page', params={'id': page_header['user_id']} %}
+                                <a href="{{ url_for(url, **(params or {})) }}">
+                                    {{ page_header['user_id'] }}
+                                </a>
+                                {% endwith %}
                                 <td>{{ page_header['like_count'] }}</td>
                                 <td>{{ page_header['posted_at']|datetime }}</td>
                                 <td>{{ page_header['updated_at']|datetime }}</td>
@@ -69,7 +74,12 @@
                             <tr data-id="{{ row.id }}" class="icon-tr">
                                 <td>{{ row.comment_floor_num }}</td>
                                 <td>{{ row.id }}</td>
-                                <td>{{ row.user_id }}</td>
+                                <td>
+                                {% with url='backend.user_profile_page', params={'id': row.user_id} %}
+                                <a href="{{ url_for(url, **(params or {})) }}">
+                                    {{ row.user_id }}
+                                </a>
+                                {% endwith %}
                                 <td>{{ row.like_count }}</td>
                                 <td>{{ row.posted_at|datetime }}</td>
                                 <td>{{ row.updated_at|datetime }}</td>
