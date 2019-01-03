@@ -41,7 +41,17 @@ def post_list(id):
                        context_variable='rows', paginate_by=10, check_bounds=False,
                        page_header={'title': module_name+' 帖子列表', 'id': id, 'current_user':get_user_id()})
 
-@backend.route('/posts/<int:id>/create', methods=['GET', 'POST'])
+@backend.route('/post/<int:id>/delete', methods=['GET'])
+@login_required
+@confirm_required
+@check_permission
+def delete_post(id):
+    post = Post.get(Post.id == id)
+    module_id = post.module_id
+    post.delete_instance()
+    return post_list(module_id)
+
+@backend.route('/post/<int:id>/create', methods=['GET', 'POST'])
 @login_required
 @confirm_required
 @check_permission
@@ -62,7 +72,7 @@ def create_post_page(id):
                                page_header={'title': '创建帖子', 'id':id, 'method':'create_post_page'},
                                data={'row': {'module_id':id}})
 
-@backend.route('/posts/<int:id>/edit', methods=['GET', 'POST'])
+@backend.route('/post/<int:id>/edit', methods=['GET', 'POST'])
 @login_required
 @confirm_required
 @check_permission
@@ -98,7 +108,7 @@ def update_post_page(id):
                                data={'row': post})
     
 
-@backend.route('/posts/<int:id>/view', methods=['GET'])
+@backend.route('/post/<int:id>/view', methods=['GET'])
 @login_required
 @confirm_required
 @check_permission
@@ -127,6 +137,16 @@ def view_post_page(id):
                                     'updated_at': updated_at,
                                     'content': content, 'current_user':get_user_id()})
 
+@backend.route('/reply/<int:id>/delete', methods=['GET'])
+@login_required
+@confirm_required
+@check_permission
+def delete_reply(id):
+    reply = Reply.get(Reply.id == id)
+    post_id = reply.post_id
+    reply.delete_instance()
+    return view_post_page(post_id)
+
 @backend.route('/reply/<int:id>/create', methods=['GET', 'POST'])
 @login_required
 @confirm_required
@@ -144,7 +164,7 @@ def create_reply_page(id):
                                check_bounds=False,
                                page_header={'title': '创建回复', 'id':id, 'method':'create_reply_page'},
                                data={'row': {'post_id':id}})
-
+    
 @backend.route('/reply/<int:id>/edit', methods=['GET', 'POST'])
 @login_required
 @confirm_required
