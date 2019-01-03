@@ -33,6 +33,11 @@
                                             {% include 'common/buttons/edit_button.html' %}
                                         {% endwith %}
                                     {% endif %}
+                                    {% if page_header['role'] == 256%}                     
+                                        {% with url='backend.delete_user', params={'id': data.row.id} %}
+                                            {% include 'common/buttons/delete_button.html' %}
+                                        {% endwith %}
+                                    {% endif %}
                                 </td>
                             </tr>
                         </tbody>

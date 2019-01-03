@@ -24,6 +24,14 @@ from website.controlers.wrap_func import confirm_required
 from flask import render_template, g
 from ...blueprints import backend
 
+@backend.route('/')
+@login_required
+@confirm_required
+@check_permission
+def index():
+    return render_template('template.html', page_header={
+        'title':'PKU Forum: Best Forum in Peking University',
+        'content':'Database Course Project'})
 
 @backend.route('/module/<int:id>', methods=['GET'])
 @login_required
@@ -231,6 +239,23 @@ def user_profile_page(id):
                            page_header={'title': '用户信息: ' + user.username, 'id':id, 
                                         'current_user':get_user_id(), 'role': role}, 
                            data={'row': user})
+
+@backend.route('/user/<int:id>/delete', methods=['GET'])
+@login_required
+@confirm_required
+@check_permission
+def delete_user(id):
+    user = User.get(User.id == id)
+    
+    for reply in Reply.select().where(Reply.user_id == id):
+        reply.delete_instance()
+    for post in Post.select().where(Post.user_id == id):
+        for reply in Reply.get_reply_list_by_post(post.id):
+            reply.delete_instance()
+        post.delete_instance()
+        
+    user.delete_instance()
+    return index()
 
 @backend.route('/user/<int:id>/edit', methods=['GET', 'POST'])
 @login_required
