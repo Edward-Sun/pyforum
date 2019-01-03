@@ -46,7 +46,12 @@ class Post(db_wrapper.Model):
             post = Post(title=title, user_id=user_id, module_id=module_id, content=content,
                         created_at=now, posted_at=now, updated_at=now)
             post.save()
-
+    
+    def add_view(self):
+        with db.transaction():
+            self.read_count = self.read_count + 1
+            self.save()
+    
     @staticmethod
     def update_post(post_id, title, content):
         now = time.time()

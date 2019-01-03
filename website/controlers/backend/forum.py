@@ -110,6 +110,8 @@ def view_post_page(id):
     if not post:
         abort(404)
     
+    post.add_view()
+    
     post_title = post.title
     user_id = post.user_id
     like_count = post.like_count
