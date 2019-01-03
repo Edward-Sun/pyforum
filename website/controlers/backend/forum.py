@@ -39,7 +39,7 @@ def post_list(id):
     
     return object_list('post/list.html', paginate=FlaskPagination(query=rows), query=rows,
                        context_variable='rows', paginate_by=10, check_bounds=False,
-                       page_header={'title': module_name+' 帖子列表', 'id': id})
+                       page_header={'title': module_name+' 帖子列表', 'id': id, 'current_user':get_user_id()})
 
 @backend.route('/posts/<int:id>/create', methods=['GET', 'POST'])
 @login_required
@@ -123,7 +123,7 @@ def view_post_page(id):
                                     'like_count': like_count,
                                     'posted_at': posted_at,
                                     'updated_at': updated_at,
-                                    'content': content})
+                                    'content': content, 'current_user':get_user_id()})
 
 @backend.route('/reply/<int:id>/create', methods=['GET', 'POST'])
 @login_required
@@ -190,7 +190,7 @@ def user_profile_page(id):
     if not user:
         abort(404)
     return render_template('user/profile.html',
-                           page_header={'title': '用户信息: ' + user.username, 'id':id}, 
+                           page_header={'title': '用户信息: ' + user.username, 'id':id, 'current_user':get_user_id()}, 
                            data={'row': user})
 
 @backend.route('/user/<int:id>/edit', methods=['GET', 'POST'])
