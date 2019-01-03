@@ -42,9 +42,9 @@ class User(UserMixin, db_wrapper.Model):
             user.gender = gender
             user.save()
     
-    def register(self, email, password, username):
+    def register(self, email, password, username, confirmed=False):
         now = time.time()
-        user = User(email=email, username=username, password_hash=generate_password_hash(password), register_date=now)
+        user = User(email=email, username=username, password_hash=generate_password_hash(password), register_date=now, confirmed=confirmed)
         try:
             user.save()
         except peewee.IntegrityError as err:

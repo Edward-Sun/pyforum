@@ -17,7 +17,7 @@ VALUES ('user"+str(i)+"', 'qq"+str(i)+"@qq.com',\
     
     for i in range(200):
         user_id = random.randint(1,101)
-        module_id = random.randint(3,7)
+        module_id = random.randint(2,7)
         read_count = random.randint(0,100)
         fout.write("INSERT INTO `post` (`title`,`user_id`,`module_id`,`content`, \
 `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`) \

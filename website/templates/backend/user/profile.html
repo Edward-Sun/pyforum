@@ -46,8 +46,13 @@
             </div>
         </div>
     </div>
-
-
+    {% if page_header['role'] == 256%} 
+        {% with url='backend.create_user_page', params={} %}
+            <a href="{{ url_for(url, **(params or {})) }}" class="btn btn-success">
+                创建新用户
+            </a>
+        {% endwith %}
+    {% endif %}
 {% endblock %}
 
 {% block script %}

@@ -49,10 +49,15 @@ def post_list(id):
     
     role = Role.get_role(user_id, id)
     
+    user_dict = {}
+    for user in User.select():
+        user_dict[user.id] = user.username
+    
     return object_list('post/list.html', paginate=FlaskPagination(query=rows), query=rows,
                        context_variable='rows', paginate_by=10, check_bounds=False,
                        page_header={'title': module_name+' 帖子列表', 'id': id,
-                                    'current_user': user_id, 'role': role})
+                                    'current_user': user_id, 'role': role,
+                                    'user_dict': user_dict})
 
 @backend.route('/post/<int:id>/delete', methods=['GET'])
 @login_required
@@ -279,3 +284,26 @@ def update_user_page(id):
         return render_template('user/profile_edit.html',
                                page_header={'title': '编辑用户信息', 'id':id, 'method':'update_user_page'},
                                data={'row': user})
+    
+    
+@backend.route('/user/create', methods=['GET', 'POST'])
+@login_required
+@confirm_required
+@check_permission
+def create_user_page():
+    if request.method == 'POST':
+        print('POST Info')
+        print(request.form)
+        print('POST Info')
+        
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        
+        User().register(email=email, password=password, username=username, confirmed=True)
+        
+        return index()
+    else:
+        return render_template('user/create_profile.html',
+                               page_header={'title': '创建用户信息', 'method':'create_user_page'},
+                               data={})

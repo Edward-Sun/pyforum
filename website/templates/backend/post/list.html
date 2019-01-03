@@ -38,7 +38,7 @@
                                 <td>
                                 {% with url='backend.user_profile_page', params={'id': row.user_id} %}
                                 <a href="{{ url_for(url, **(params or {})) }}">
-                                    {{ row.user_id }}
+                                    {{ page_header['user_dict'][row.user_id] }}
                                 </a>
                                 {% endwith %}
                                 </td>
