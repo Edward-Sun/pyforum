@@ -5,6 +5,7 @@
             <div class="box">
                 <!-- /.以下是原帖 -->
                 <div class="box-body">
+                    <div class="animated flipInX">
                     <div class="panel panel-default">
                     <div class="panel-heading">
                     <table class="table table-bordered">
@@ -48,11 +49,13 @@
                     </div>
                     <div class="panel-body">{{ page_header['post_content']|safe }}</div>
                     </div>
+                    </div>
                 </div>
                 <!-- /.以下是回复-->
                 
                 <div class="box-body">                  
                     {% for row in rows %}
+                    <div class="animated flipInX">
                     <div class="panel panel-default">
                     <div class="panel-heading">
                     <table class="table table-bordered">
@@ -99,6 +102,7 @@
                     </div>
                     <div class="panel-body">{{ row.content|safe }}</div>
                     </div>
+                    </div>
                     {% else %}
                     <table class="table table-bordered">
                         <tbody>
@@ -115,7 +119,7 @@
                         {% include 'common/buttons/reply_button.html' %}
                     {% endwith %}
                 </div>
-            </div>
+                </div>
         </div>
     </div>
 

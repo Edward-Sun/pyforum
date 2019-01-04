@@ -33,9 +33,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!--   toastr -->
     <link href="{{ url_for('backend.static', filename='node_modules/toastr/build/toastr.min.css') }}"
           rel="stylesheet">
-
+    <link href="{{ url_for('backend.static', filename='css/animate.css') }}"
+          rel="stylesheet">
+    
     <link rel="shortcut icon" href="{{ url_for('backend.static',filename='imgs/favicon.ico') }}"/>
-
+    
     {% block script_header %}
     {% endblock %}
 
