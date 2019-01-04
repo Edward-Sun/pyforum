@@ -7,6 +7,11 @@
                     {% with url='backend.create_post_page', params={'id': page_header['id']} %}
                         {% include 'common/buttons/create_button.html' %}
                     {% endwith %}
+                    {% if page_header['role'] == 256%}                       
+                        {% with url='backend.update_module_page', params={'id': page_header['id']} %}
+                            {% include 'common/buttons/edit_module.html' %}
+                        {% endwith %}
+                    {% endif %}
                 </div>
 
                 <!-- /.box-header -->

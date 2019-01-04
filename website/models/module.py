@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from playhouse.shortcuts import model_to_dict
 
-from website.app import db_wrapper
+from website.app import db_wrapper, db
 from peewee import IntegerField, CharField, PrimaryKeyField, Model, SmallIntegerField, ForeignKeyField
 
 __author__ = 'walker_lee&edward_sun'
@@ -19,7 +19,13 @@ class Module(db_wrapper.Model):
 
     class Meta:
         db_table = 'module'
-    
+
+    def update_info(self, name, intro):
+        with db.transaction():
+            self.name = name
+            self.intro = intro
+            self.save()
+            
     @staticmethod
     def get_menus():
         """获取菜单"""

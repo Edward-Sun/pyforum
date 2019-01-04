@@ -63,6 +63,36 @@ def post_list(id):
                                     'current_user': user_id, 'role': role, 'module_banzhu': banzhu,
                                     'user_dict': user_dict})
 
+    
+
+@backend.route('/module/<int:id>/edit', methods=['GET', 'POST'])
+@login_required
+@confirm_required
+@check_permission
+def update_module_page(id):
+    if request.method == 'POST':
+        print('POST Info')
+        print(request.form)
+        print('POST Info')
+        
+        id = request.form['id']
+        name = request.form['name']
+        intro = request.form['intro']
+        
+        module = Module.get(Module.id == id)
+        if not module:
+            abort(404)        
+        module.update_info(name=name, intro=intro)
+        
+        return post_list(id)
+    else:
+        module = Module.get(Module.id == id)
+        if not module:
+            abort(404)
+        return render_template('module/module_edit.html',
+                               page_header={'title': '编辑板块信息', 'id':id, 'method':'update_module_page'},
+                               data={'row': module})
+
 @backend.route('/post/<int:id>/delete', methods=['GET'])
 @login_required
 @confirm_required
@@ -335,7 +365,6 @@ def update_user_page(id):
         return render_template('user/profile_edit.html',
                                page_header={'title': '编辑用户信息', 'id':id, 'method':'update_user_page'},
                                data={'row': user})
-    
     
 @backend.route('/user/create', methods=['GET', 'POST'])
 @login_required
