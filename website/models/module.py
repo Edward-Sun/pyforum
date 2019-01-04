@@ -12,6 +12,7 @@ class Module(db_wrapper.Model):
     id = PrimaryKeyField()
     parent_id = IntegerField()
     name = CharField()
+    intro = CharField()
     url = CharField()
     prefix = CharField()
     weight = SmallIntegerField()

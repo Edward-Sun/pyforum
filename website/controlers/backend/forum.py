@@ -39,7 +39,7 @@ def index():
 @check_permission
 def post_list(id):
     user_id = get_user_id()
-    rows = Post.get_post_list_by_module(id)
+    rows = Post.get_post_list_by_module(id).order_by(-Post.updated_at)
     
     module = Module.get(Module.id == id)
     if not module:
@@ -53,10 +53,14 @@ def post_list(id):
     for user in User.select():
         user_dict[user.id] = user.username
     
+    intro = module.intro
+    
+    banzhu = Role.get_banzhu(id)
+    
     return object_list('post/list.html', paginate=FlaskPagination(query=rows), query=rows,
                        context_variable='rows', paginate_by=10, check_bounds=False,
-                       page_header={'title': module_name+' 帖子列表', 'id': id,
-                                    'current_user': user_id, 'role': role,
+                       page_header={'title': module_name+' 帖子列表', 'id': id, 'module_intro': intro,
+                                    'current_user': user_id, 'role': role, 'module_banzhu': banzhu,
                                     'user_dict': user_dict})
 
 @backend.route('/post/<int:id>/delete', methods=['GET'])
@@ -159,7 +163,7 @@ def view_post_page(id):
                                     'like_count': like_count,
                                     'posted_at': posted_at,
                                     'updated_at': updated_at,
-                                    'content': content,
+                                    'post_content': content,
                                     'current_user': get_user_id(),
                                     'role': role})
 
@@ -216,7 +220,7 @@ def update_reply_page(id):
         Reply.update_reply(reply_id=id, content=content)
         return view_post_page(post_id)
     else:
-        reply = Reply.get(Reply.id == id)
+        reply = Reply.get(Reply.id == id).limit(5)
         if not reply:
             abort(404)
         return render_template('post/edit_reply.html',
@@ -239,11 +243,13 @@ def user_profile_page(id):
         abort(404)
         
     role = Role.get_role(get_user_id(), 0)
-        
+    
+    posts = Post.select().where(Post.user_id == id).order_by(-Post.updated_at)
+    
     return render_template('user/profile.html',
                            page_header={'title': '用户信息: ' + user.username, 'id':id, 
                                         'current_user':get_user_id(), 'role': role}, 
-                           data={'row': user})
+                           data={'row': user, 'rows': posts})
 
 @backend.route('/user/<int:id>/delete', methods=['GET'])
 @login_required

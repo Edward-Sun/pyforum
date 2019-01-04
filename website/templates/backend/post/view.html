@@ -31,6 +31,7 @@
                                     {{ page_header['user_id'] }}
                                 </a>
                                 {% endwith %}
+                                </td>
                                 <td>{{ page_header['like_count'] }}</td>
                                 <td>{{ page_header['posted_at']|datetime }}</td>
                                 <td>{{ page_header['updated_at']|datetime }}</td>
@@ -45,7 +46,7 @@
                         </tbody>
                     </table>
                     </div>
-                    <div class="panel-body">{{ page_header['content']|safe }}</div>
+                    <div class="panel-body">{{ page_header['post_content']|safe }}</div>
                     </div>
                 </div>
                 <!-- /.以下是回复-->
@@ -78,6 +79,7 @@
                                     {{ row.user_id }}
                                 </a>
                                 {% endwith %}
+                                </td>
                                 <td>{{ row.like_count }}</td>
                                 <td>{{ row.posted_at|datetime }}</td>
                                 <td>{{ row.updated_at|datetime }}</td>

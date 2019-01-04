@@ -43,6 +43,14 @@ class Role(db_wrapper.Model):
                 return max(role.role_id, admin_role.role_id)
     
     @staticmethod
+    def get_banzhu(module_id):
+        roles = Role.select().where(Role.role_id == 256, Role.module_id == module_id)
+        ret = []
+        for role in roles:
+            ret.append(role.user_id)
+        return ret
+    
+    @staticmethod
     def update_role(role_id, user_id, module_id):
         with db.transaction():
             role = Role.get(Role.user_id == user_id, Role.module_id == module_id)

@@ -35,6 +35,9 @@ CREATE TABLE `module` (
   `name`      VARCHAR(20)
               COLLATE utf8_unicode_ci NOT NULL DEFAULT ''
   COMMENT '模块名称',
+  `intro`      VARCHAR(100)
+              COLLATE utf8_unicode_ci DEFAULT '板块介绍尚未添加'
+  COMMENT '模块介绍',
   `url`       VARCHAR(50)
               COLLATE utf8_unicode_ci NOT NULL DEFAULT ''
   COMMENT '路径',
@@ -46,9 +49,9 @@ CREATE TABLE `module` (
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT = '模块表';
 
-insert into module(parent_id,name,url,weight) values(0,'版块1','/module/1',900);
-insert into module(parent_id,name,url,weight) values(0,'版块2','/module/2',800);
-insert into module(parent_id,name,url,weight) values(0,'版块3','/module/3',700);
+insert into module(parent_id,name,url,intro,weight) values(0,'版块1','/module/1','哈哈哈哈哈哈哈测试板块',900);
+insert into module(parent_id,name,url,intro,weight) values(0,'版块2','/module/2','嘻嘻嘻嘻嘻嘻嘻还是测试板块',800);
+insert into module(parent_id,name,url,intro,weight) values(0,'版块3','/module/3','红红火火恍恍惚惚',700);
 
 #角色用户模块表 -----开始
 DROP TABLE IF EXISTS `role`;

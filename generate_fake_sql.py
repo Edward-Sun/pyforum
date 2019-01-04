@@ -15,9 +15,11 @@ VALUES ('user"+str(i)+"', 'qq"+str(i)+"@qq.com',\
     fout.write("insert into module(parent_id,name,url,weight) values(0,'版块6','/module/6',400);\n")
     fout.write("insert into module(parent_id,name,url,weight) values(0,'版块7','/module/7',300);\n")
     
-    for i in range(200):
+    post_count = 300
+    
+    for i in range(post_count):
         user_id = random.randint(1,101)
-        module_id = random.randint(2,7)
+        module_id = random.randint(1,7)
         read_count = random.randint(0,100)
         fout.write("INSERT INTO `post` (`title`,`user_id`,`module_id`,`content`, \
 `created_at`,`posted_at`,`updated_at`,`read_count`,`like_count`) \
@@ -25,12 +27,12 @@ VALUES ('测试"+str(i)+"标题:"+''.join(fake.words(nb=3))+"',"+str(user_id)+",
 UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),UNIX_TIMESTAMP(),"+str(read_count)+","+str(random.randint(0,read_count))+");\n")
     
     floor_num = {}
-    for i in range(2,201):
+    for i in range(2,post_count+1):
         floor_num[i] = 1
         
-    for i in range(1200):
+    for i in range(1800):
         user_id = random.randint(1,101)
-        post_id = random.randint(2,200)
+        post_id = random.randint(2,post_count)
         floor_num[post_id] += 1
         
         fout.write("UPDATE `post` SET `comment_floor` = "+str(floor_num[post_id])+" WHERE `id` = "+str(post_id)+";\n")

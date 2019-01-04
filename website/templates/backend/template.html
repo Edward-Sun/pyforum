@@ -83,10 +83,6 @@ desired effect
 
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top" role="navigation">
-            <!-- Sidebar toggle button-->
-            <a class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
@@ -176,9 +172,22 @@ desired effect
             <h1>
                 {{ page_header['title'] or '' }}
             </h1>
-            <i>
+            <p style="text-align:left; display:inline">
             {{ page_header['content'] or '' }}
-            </i>
+            {{ page_header['module_intro'] or '' }}
+                <span style="float:right;">
+                版主信息：
+                {% if page_header['module_banzhu'] %}
+                    {% for user in page_header['module_banzhu'] %}
+                        {% with url='backend.user_profile_page', params={'id': user} %}
+                        <a href="{{ url_for(url, **(params or {})) }}">
+                            {{ page_header['user_dict'][user] }}
+                        </a>
+                        {% endwith %}
+                    {% endfor %}  
+                {% endif %}
+                </span>
+            </p>
         </section>
 
         <!-- Main content -->
