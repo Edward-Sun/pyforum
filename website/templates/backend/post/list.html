@@ -31,6 +31,16 @@
                         class="btn btn-info btn-sm"
                         title="">板块内最热贴</a>
                     {% endwith %}
+                    {% with url='backend.get_moreactiveUser', params={'id': page_header['id'], 'id2': 0} %}
+                    <form class="form-inline" action = "{{ url_for(url, **(params or {})) }}" style="display:inline;" align="right" method = "post">
+                        <div class="form-group">
+                        <input type="number" class="form-control mb-2 mr-sm-2" name="moduleID" placeholder="板块ID">
+                        </div>
+                        <button type="submit" class="btn btn-info btn-sm">
+                            相对活跃用户查询
+                        </button>
+                    </form>
+                    {% endwith %}
                     {% if page_header['role'] == 256%}                       
                         {% with url='backend.update_module_page', params={'id': page_header['id']} %}
                             {% include 'common/buttons/edit_module.html' %}

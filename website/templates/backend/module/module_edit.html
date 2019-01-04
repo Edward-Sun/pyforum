@@ -41,6 +41,7 @@
                     
                     <hr>
                     
+                    {% if page_header['role'] == 256%}                       
                     <form class="form-horizontal" action = "{{ url_for(url, **(params or {})) }}" method = "post">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
                         <input type="hidden" class="form-control" name="form_id" value="2">
@@ -78,7 +79,7 @@
                     </form>
                     
                     <hr>
-                    
+                    {% endif %}
                     {% include 'common/buttons/go_back.html' %}
                     {% endwith %}
                 </div>

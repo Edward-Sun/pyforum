@@ -1,0 +1,44 @@
+{% extends 'template.html' %}
+{% block body %}
+    <div class="row" style="text-align:right">
+        <div class="col-md-12">
+            <div class="box">               
+                <!-- /.box-header -->
+                <div class="box-body" style="text-align:left">
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th class="col-sm-1 sorttable-nosort">用户ID</th>
+                            <th class="col-sm-1 sorttable-nosort">用户昵称</th>
+                            <th class="col-sm-1 sorttable-nosort">性别</th>
+                            <th class="col-sm-1 sorttable-nosort">等级</th>
+                            <th class="col-sm-1 sorttable-nosort">在板块ID={{page_header['id']}}的回帖次数</th>
+                            <th class="col-sm-1 sorttable-nosort">在板块ID={{page_header['id2']}}的回帖次数</th>
+                        </tr>
+                        {% for row in data.row %}
+                            <tr data-id="{{ row.id }}" class="icon-tr">
+                                <td>{{ row[0].id }}</td>
+                                <td>{{ row[0].username }}</td>
+                                <td>{{ row[0].gender }}</td>
+                                <td>{{ row[0].level }}</td>
+                                <td>{{ row[1] }}</td>
+                                <td>{{ row[2] }}</td>                                                               
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan=10 class="center">无用户</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

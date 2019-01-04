@@ -92,3 +92,24 @@ class Post(db_wrapper.Model):
     def get_postnum_inTen(user_id):
         now = time.time()
         return Post.select().where((Post.user_id==user_id)&(now-Post.created_at<=600)).count()
+    
+    @staticmethod
+    def moreActive(id1, id2):
+        print(id1, id2)
+        user_dict = {}
+        tmp1 = User.select(User.id, User.username, User.gender, User.level, fn.COUNT(Post.id).alias('count')).join(Post, on=(User.id==Post.user_id)).group_by(User.id, Post.module_id).where(Post.module_id==id1)
+        tmp2 = User.select(User.id, User.username, User.gender, User.level, fn.COUNT(Post.id).alias('count')).join(Post, on=(User.id==Post.user_id)).group_by(User.id, Post.module_id).where(Post.module_id==id2)
+        for user in tmp2:
+            print(dir(user))
+            user_dict[user.id] = [user.count, 0, user]
+        
+        for user in tmp1:
+            if user.id in user_dict:
+                user_dict[user.id][1] = user.count
+        
+        ret = [(user_dict[userid][2], user_dict[userid][0], user_dict[userid][1]) for userid in user_dict if user_dict[userid][0] > user_dict[userid][1]]
+
+        return ret
+
+
+    

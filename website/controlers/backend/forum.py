@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import abort, jsonify, flash
+from flask import abort, jsonify, flash, redirect
 from flask import request
 from flask_paginate import Pagination, get_page_args
 from peewee import JOIN, fn
@@ -111,9 +111,10 @@ def update_module_page(id):
         module = Module.get(Module.id == id)
         if not module:
             abort(404)
+        role = Role.get_role(get_user_id(), 0)
         return render_template('module/module_edit.html',
                                page_header={'title': '编辑板块信息', 'id':id, 'method':'update_module_page'},
-                               data={'row': module})
+                               data={'row': module, 'role': role})
 
 @backend.route('/post/<int:id>/delete', methods=['GET'])
 @login_required
@@ -580,3 +581,43 @@ def get_module_mostPopular_post(id):
                         'current_user': get_user_id(),
                         'role': role,
                         'user_dict': user_dict})
+
+
+@backend.route('/module/<int:id>/compwith/<int:id2>', methods=['GET', 'POST'])
+@login_required
+@confirm_required
+@check_permission
+def get_moreactiveUser(id, id2):
+    if request.method == 'POST':
+        id2 = request.form['moduleID']
+    else:
+        id2 = id2
+    
+    return redirect('/module/'+str(id)+'/compwith2/'+str(id2))
+
+@backend.route('/module/<int:id>/compwith2/<int:id2>', methods=['GET'])
+@login_required
+@confirm_required
+@check_permission
+def get_moreactiveUser2(id, id2):
+    print('DEBUG:', id, id2)
+    if request.method == 'POST':
+        id2 = request.form['moduleID']
+    else:
+        id2 = id2
+        
+    rows = Post.moreActive(id, id2)
+    module = Module.get(Module.id == id)
+    module2 = Module.get(Module.id == id2)
+    if not module:
+        abort(404)
+
+    module_name = module.name
+    module_name2 = module2.name
+    #return object_list('module/module_comp.html', paginate=FlaskPagination(query=rows), query=rows,
+                   # context_variable='rows', paginate_by=10, check_bounds=False,
+                    #page_header={'title':'在'+module_name2 + '中发帖数高于'+module_name+'的用户', 'id': id})
+    print(rows)        
+    return render_template('module/module_comp.html',
+                           page_header={'title': '1', 'id':id, 'id2':id2},
+                           data={'row': rows})
