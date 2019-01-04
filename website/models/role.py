@@ -53,9 +53,10 @@ class Role(db_wrapper.Model):
     @staticmethod
     def update_role(role_id, user_id, module_id):
         with db.transaction():
-            role = Role.get(Role.user_id == user_id, Role.module_id == module_id)
-            if not role:
+            role = Role.select().where(Role.user_id == user_id, Role.module_id == module_id)
+            if len(role) == 0:
                 role = Role.create(role_id=role_id, user_id=user_id, module_id=module_id)
             else:
+                role = role[0]
                 role.role_id = role_id
             role.save()

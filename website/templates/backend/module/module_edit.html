@@ -16,6 +16,7 @@
                     {% with url='backend.'+page_header['method'], params={'id': page_header['id']} %}
                     <form class="form-horizontal" action = "{{ url_for(url, **(params or {})) }}" method = "post">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                        <input type="hidden" class="form-control" name="form_id" value="1">
                         <input type="hidden" class="form-control" name="id" value="{{ data.row.id }}">
 
                         <div class="form-group">
@@ -34,10 +35,51 @@
                         </div>
 
                         <div class="box-footer clearfix col-md-offset-2">
-                            {% include 'common/buttons/go_back.html' %}
                             {% include 'common/buttons/confirm.html' %}
                         </div>
                     </form>
+                    
+                    <hr>
+                    
+                    <form class="form-horizontal" action = "{{ url_for(url, **(params or {})) }}" method = "post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                        <input type="hidden" class="form-control" name="form_id" value="2">
+                        <input type="hidden" class="form-control" name="id" value="{{ data.row.id }}">
+
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">删除版主权限</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="username" placeholder=版主昵称>
+                            </div>
+                        </div>
+
+                        <div class="box-footer clearfix col-md-offset-2">
+                            {% include 'common/buttons/confirm.html' %}
+                        </div>
+                    </form>
+                    
+                    <hr>
+                    
+                    <form class="form-horizontal" action = "{{ url_for(url, **(params or {})) }}" method = "post">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                        <input type="hidden" class="form-control" name="form_id" value="3">
+                        <input type="hidden" class="form-control" name="id" value="{{ data.row.id }}">
+
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">添加版主权限</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="username" placeholder=版主昵称>
+                            </div>
+                        </div>
+
+                        <div class="box-footer clearfix col-md-offset-2">
+                            {% include 'common/buttons/confirm.html' %}
+                        </div>
+                    </form>
+                    
+                    <hr>
+                    
+                    {% include 'common/buttons/go_back.html' %}
                     {% endwith %}
                 </div>
             </div>

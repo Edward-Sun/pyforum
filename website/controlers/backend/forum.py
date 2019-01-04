@@ -75,16 +75,38 @@ def update_module_page(id):
         print(request.form)
         print('POST Info')
         
+        form_id = request.form['form_id']
         id = request.form['id']
-        name = request.form['name']
-        intro = request.form['intro']
-        
         module = Module.get(Module.id == id)
         if not module:
-            abort(404)        
-        module.update_info(name=name, intro=intro)
+            abort(404)    
+        if form_id == '1':
+            name = request.form['name']
+            intro = request.form['intro']
+    
+            module.update_info(name=name, intro=intro)
+            return post_list(id)
         
-        return post_list(id)
+        elif form_id == '2':
+            username = request.form['username']
+            user = User.select().where(User.username == username)
+            if len(user) == 0:
+                flash('Cannot find user with such a username')
+            else:
+                user = user[0]
+                Role.update_role(20, user.id, module.id)
+            return post_list(id)
+        
+        elif form_id == '3':
+            username = request.form['username']
+            user = User.select().where(User.username == username)
+            if len(user) == 0:
+                flash('Cannot find user with such a username')
+            else:
+                user = user[0]
+                Role.update_role(256, user.id, module.id)
+            return post_list(id)
+        
     else:
         module = Module.get(Module.id == id)
         if not module:
