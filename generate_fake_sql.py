@@ -15,6 +15,15 @@ VALUES ('user"+str(i)+"', 'qq"+str(i)+"@qq.com',\
     fout.write("insert into module(parent_id,name,url,weight) values(0,'版块6','/module/6',400);\n")
     fout.write("insert into module(parent_id,name,url,weight) values(0,'版块7','/module/7',300);\n")
     
+    user_module_dict = {}
+    
+    for i in range(1, 8):
+        for _ in range(random.randint(1,4)):
+            user_id = random.randint(3,101)
+            if (user_id, i) not in user_module_dict:
+                fout.write("INSERT INTO `role` (`role_id`,`user_id`,`module_id`) VALUES (256,"+str(user_id)+","+str(i)+");")
+            user_module_dict[(user_id, i)] = 1
+            
     post_count = 300
     
     for i in range(post_count):
