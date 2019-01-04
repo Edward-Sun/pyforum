@@ -70,7 +70,7 @@ def post_list(id):
 def delete_post(id):
     post = Post.get(Post.id == id)
     module_id = post.module_id
-    for reply in Reply.get_reply_list_by_post(post_id):
+    for reply in Reply.get_reply_list_by_post(post.id):
         reply.delete_instance()
     post.delete_instance()
     return post_list(module_id)
@@ -225,7 +225,7 @@ def update_reply_page(id):
         Reply.update_reply(reply_id=id, content=content)
         return view_post_page(post_id)
     else:
-        reply = Reply.get(Reply.id == id).limit(5)
+        reply = Reply.get(Reply.id == id)
         if not reply:
             abort(404)
         return render_template('post/edit_reply.html',
