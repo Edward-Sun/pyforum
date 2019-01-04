@@ -156,6 +156,10 @@ def view_post_page(id):
     
     role = Role.get_role(get_user_id(), module_id)
     
+    user_dict = {}
+    for user in User.select():
+        user_dict[user.id] = user.username
+    
     return object_list('post/view.html', paginate=FlaskPagination(query=rows), query=rows,
                        context_variable='rows', paginate_by=100, check_bounds=False,
                        page_header={'title': post_title, 'id': id,
@@ -165,7 +169,8 @@ def view_post_page(id):
                                     'updated_at': updated_at,
                                     'post_content': content,
                                     'current_user': get_user_id(),
-                                    'role': role})
+                                    'role': role,
+                                    'user_dict': user_dict})
 
 @backend.route('/reply/<int:id>/delete', methods=['GET'])
 @login_required
