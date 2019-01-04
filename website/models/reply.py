@@ -29,7 +29,7 @@ class Reply(db_wrapper.Model):
 
     @staticmethod
     def get_reply_list_by_post(post_id):
-        return Reply.select().where(Reply.post_id == post_id)
+        return Reply.select().where(Reply.post_id == post_id).order_by(Reply.comment_floor_num)
 
     @staticmethod
     def create_reply(user_id, post_id, content):
