@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import abort, jsonify
+from flask import abort, jsonify, flash
 from flask import request
 from flask_paginate import Pagination, get_page_args
 from peewee import JOIN, fn
@@ -232,12 +232,12 @@ def update_reply_page(id):
                                page_header={'title': '编辑回复', 'id':id, 'method':'update_reply_page'},
                                data={'row': reply})
     
-    
-@backend.route('/user/<int:id>', methods=['GET'])
+
+@backend.route('/user/xml/<int:id>', methods=['GET'])
 @login_required
 @confirm_required
 @check_permission
-def user_profile_page(id):
+def user_xml(id):
     if id == 0:
         id = get_user_id()
     user = User.get(User.id == id)
@@ -246,16 +246,56 @@ def user_profile_page(id):
     print('User Info')
     if not user:
         abort(404)
-        
+    posts = Post.get_recent_posts_by_user(id)
+    xml = User.get_xml(user, posts)
+
+    return render_template('xml.html', page_header={'xml': xml})
+
+@backend.route('/user/search', methods=['POST'])
+@login_required
+@confirm_required
+@check_permission
+def search_user_profile_page():
+    print('Search User Info')
+    print(request.form)
+    print('Search User Info')
+
+    username = request.form['search_user']
+
+    user = User.select().where(User.username == username)
+    if len(user) == 0:
+        flash('Cannot find user with such a username')
+        return user_profile_page(get_user_id())
+    else:
+        user = user[0]
+
+    return user_profile_page(user.id)
+
+@backend.route('/user/<int:id>', methods=['GET'])
+@login_required
+@confirm_required
+@check_permission
+def user_profile_page(id):
+    if id == 0:
+        id = get_user_id()
+    user = User.select().where(User.id == id)
+    print('User Info')
+    print(user)
+    print('User Info')
+    if len(user) == 0:
+        abort(404)
+    else:
+        user = user[0]
+
     role = Role.get_role(get_user_id(), 0)
-    
-    posts = Post.select().where(Post.user_id == id).order_by(-Post.updated_at)
-    
+
+    posts = Post.get_recent_posts_by_user(id)
+
     return render_template('user/profile.html',
                            page_header={'title': '用户信息: ' + user.username, 'id':id, 
                                         'current_user':get_user_id(), 'role': role}, 
                            data={'row': user, 'rows': posts})
-
+        
 @backend.route('/user/<int:id>/delete', methods=['GET'])
 @login_required
 @confirm_required

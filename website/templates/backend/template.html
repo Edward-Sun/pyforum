@@ -37,7 +37,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="shortcut icon" href="{{ url_for('backend.static',filename='imgs/favicon.ico') }}"/>
 
     {% block script_header %}
-{% endblock %}
+    {% endblock %}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -80,7 +80,7 @@ desired effect
             <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><b>PKU</b> Forum</span>
         </a>
-
+       
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Navbar Right Menu -->
@@ -144,7 +144,7 @@ desired effect
         <section class="sidebar">
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu">
-                <li class="header">Menu</li>
+                <li class="header">板块列表</li>
 
                 {% for item in g.menu %}
                     {% if permission(item.id) %}
@@ -176,8 +176,8 @@ desired effect
             {{ page_header['content'] or '' }}
             {{ page_header['module_intro'] or '' }}
                 <span style="float:right;">
-                版主信息：
                 {% if page_header['module_banzhu'] %}
+                    版主信息：
                     {% for user in page_header['module_banzhu'] %}
                         {% with url='backend.user_profile_page', params={'id': user} %}
                         <a href="{{ url_for(url, **(params or {})) }}">

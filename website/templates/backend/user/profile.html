@@ -1,16 +1,29 @@
 {% extends 'template.html' %}
 {% block body %}
+    {% with url='backend.search_user_profile_page', params={} %}
+        <form class="form-inline" action = "{{ url_for(url, **(params or {})) }}" style="display:inline;" align="right" method = "post">
+            <div class="form-group">
+            <input type="text" class="form-control mb-2 mr-sm-2" name="search_user" placeholder="用户名">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">
+                查询用户
+            </button>
+        </form>
+    {% endwith %}
+
     {% if page_header['role'] == 256%} 
         {% with url='backend.create_user_page', params={} %}
-            <a href="{{ url_for(url, **(params or {})) }}" class="btn btn-success">
+            <a href="{{ url_for(url, **(params or {})) }}" class="btn btn-success" style="display:inline; float: right;">
                 创建新用户
             </a>
         {% endwith %}
     {% endif %}
 
+    <p></p>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12">            
             <div class="box">
+                <h3> 基本信息 </h3>
                 <!-- /.以下是原帖 -->
                 <div class="box-body">
                     <div class="panel panel-default">
@@ -35,7 +48,10 @@
                                 <td>{{ data.row.birthday|date }}</td>
                                 <td>{{ data.row.gender }}</td>
                                 <td>{{ data.row.level }}</td>
-                                <td>                                  
+                                <td>       
+                                    {% with url='backend.user_xml', params={'id': data.row.id} %}
+                                        {% include 'common/buttons/xml_button.html' %}
+                                    {% endwith %}
                                     {% if page_header['current_user'] == data.row.id or page_header['role'] == 256%}                     
                                         {% with url='backend.update_user_page', params={ 'id': data.row.id } %}
                                             {% include 'common/buttons/edit_button.html' %}
@@ -64,20 +80,22 @@
             <table class="table table-bordered">
                 <tbody>                        
                     <tr>
-                        <th class="col-sm-1 sorttable-nosort">
-                            楼数
-                        </th>
                         <th class="col-sm-1 sorttable-nosort">帖子ID</th>
                         <th class="col-sm-1 sorttable-nosort">帖子标题</th>
+                        <th class="col-sm-1 sorttable-nosort">板块ID</th>
+                        <th class="col-sm-1 sorttable-nosort">楼数</th>
+                        <th class="col-sm-1 sorttable-nosort">阅读数</th>
                         <th class="col-sm-1 sorttable-nosort">点赞数</th>
                         <th class="col-sm-1 sorttable-nosort">发帖时间</th>
                         <th class="col-sm-1 sorttable-nosort">更新时间</th>
                         <th class="col-sm-2 sorttable-nosort">操作</th>
                     </tr>                        
                     <tr data-id="{{ post.id }}" class="icon-tr">
-                        <td>{{ post.comment_floor }}</td>
                         <td>{{ post.id }}</td>
                         <td>{{ post.title }}</td>
+                        <td>{{ post.module_id }}</td>
+                        <td>{{ post.comment_floor }}</td>
+                        <td>{{ post.read_count }}</td>
                         <td>{{ post.like_count }}</td>
                         <td>{{ post.posted_at|datetime }}</td>
                         <td>{{ post.updated_at|datetime }}</td>

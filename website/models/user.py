@@ -29,6 +29,44 @@ class User(UserMixin, db_wrapper.Model):
     
     class Meta:
         db_table = 'user'
+        
+    @staticmethod    
+    def get_xml(user, posts):
+        ret = ''
+        ret += '<XML>\n'
+        ret += '  <Users>\n'
+        ret += '    <User>\n'
+        ret += '      <Info>\n'
+        ret += '        <BasicInfo>\n'
+        ret += '          <UserID>'+str(user.id)+'</UserID>\n'
+        ret += '          <UserName>'+str(user.username)+'</UserName>\n'
+        ret += '          <Email>'+str(user.email)+'</Email>\n'
+        ret += '          <Birthday>'+str(user.birthday)+'</Birthday>\n'
+        ret += '          <Register>'+str(user.register_date)+'</Register>\n'
+        ret += '          <Gender>'+str(user.gender)+'</Gender>\n'
+        ret += '          <Level>'+str(user.level)+'</Level>\n'
+        ret += '        </BasicInfo>\n'
+        ret += '        <OtherInfo>\n'
+        ret += '          <Posts>\n'
+        for post in posts:
+            ret += '            <Post>\n'
+            ret += '              <Floor>'+str(post.comment_floor)+'</Floor>\n'
+            ret += '              <Id>'+str(post.id)+'</Id>\n'
+            ret += '              <Title>'+str(post.title)+'</Title>\n'
+            ret += '              <ModuleId>'+str(post.module_id)+'</ModuleId>\n'
+            ret += '              <ReadNum>'+str(post.read_count)+'</ReadNum>\n'
+            ret += '              <LikeNum>'+str(post.like_count)+'</LikeNum>\n'
+            ret += '              <Post_at>'+str(post.posted_at)+'</Post_at>\n'
+            ret += '              <Update_at>'+str(post.updated_at)+'</Update_at>\n'
+            ret += '            </Post>\n'
+        ret += '          </Posts>\n'
+        ret += '        <OtherInfo>\n'
+        ret += '      </Info>\n'
+        ret += '    </User>\n'
+        ret += '  </Users>\n'
+        ret += '</XML>'
+
+        return ret    
     
     @staticmethod
     def update_profile(user_id, birthday, gender):

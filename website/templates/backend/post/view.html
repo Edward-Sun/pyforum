@@ -110,9 +110,6 @@
                     {% endfor %}
                 </div>
                 
-                <div class="box-footer clearfix ">
-                    {{ paginate.links }}
-                </div>
                 <div class="box-footer with-border">
                     {% with url='backend.create_reply_page', params={'id': page_header['id']} %}
                         {% include 'common/buttons/reply_button.html' %}

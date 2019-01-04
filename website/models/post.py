@@ -37,8 +37,13 @@ class Post(db_wrapper.Model):
             
     @staticmethod
     def get_post_list_by_module(module_id):
-        return Post.select().where(Post.module_id == module_id)
+        return Post.select().where(Post.module_id == module_id).order_by(-Post.updated_at)
 
+            
+    @staticmethod
+    def get_recent_posts_by_user(user_id):
+        return Post.select().where(Post.user_id == user_id).order_by(-Post.updated_at).limit(5)
+    
     @staticmethod
     def create_post(user_id, module_id, title, content):
         now = time.time()
