@@ -1,0 +1,67 @@
+{% extends 'template.html' %}
+{% block body %}
+    <div class="row" style="text-align:right">
+        <div class="col-md-12">
+            <div class="box">               
+                <div class="box-header with-border">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default">按照用户发帖数排序</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" 
+                        data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">切换下拉菜单</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        {% with url='backend.get_module_userInfo2', params={'id': page_header['id']} %}
+                        <li><a href="{{ url_for(url,**(params or {})) }}">按照用户回贴数排序</a></li>
+                        <li class="divider"></li>
+                        {% endwith %}
+                    </ul>
+                </div>          
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" style="text-align:left">
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th class="col-sm-1 sorttable-nosort">用户ID</th>
+                            <th class="col-sm-1 sorttable-nosort">用户昵称</th>
+                            <th class="col-sm-1 sorttable-nosort">性别</th>
+                            <th class="col-sm-1 sorttable-nosort">等级</th>
+                            <th class="col-sm-1 sorttable-nosort">发帖次数</th>
+                        </tr>
+                        {% for row in rows %}
+                            <tr data-id="{{ row.id }}" class="icon-tr">
+                                <td>{{ row.id }}</td>
+                                <td>
+                                {% with url='backend.user_profile_page', params={'id': row.id} %}
+                                <a href="{{ url_for(url, **(params or {})) }}">
+                                    {{ page_header['user_dict'][row.id] }}
+                                </a>
+                                {% endwith %}
+                                </td>
+                                <td>{{ row.gender }}</td>
+                                <td>{{ row.level }}</td>
+                                <td>{{ row.count }}</td>                                                               
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan=10 class="center">无用户</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="box-footer clearfix ">
+                    {{ paginate.links }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

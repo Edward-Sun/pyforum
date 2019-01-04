@@ -1,0 +1,96 @@
+{% extends 'template.html' %}
+{% block body %}
+    <div class="row" style="text-align:right">
+        <div class="col-md-12">
+            <div class="box">               
+                <div class="box-header with-border">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default">按点击量排序</button>
+                    <button type="button" class="btn btn-default dropdown-toggle" 
+                        data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">切换下拉菜单</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        {% with url='backend.get_popular_post_with_reply',params={} %}
+                        <li><a href="{{ url_for(url,**(params or {})) }}">按回复数排序</a></li>
+                        <li class="divider"></li>
+                        {% endwith %}
+                    </ul>
+                </div>          
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <th class="col-sm-1 sorttable-nosort">ID
+                                </th>
+                                <th class="col-sm-1 sorttable-nosort">标题</th>
+                                <th class="col-sm-1 sorttable-nosort">用户</th>
+                                <th class="col-sm-1 sorttable-nosort">
+                                    楼数
+                                </th>
+                                <th class="col-sm-1 sorttable-nosort">
+                                    阅读数
+                                </th>
+                                <th class="col-sm-1 sorttable-nosort">
+                                    点赞数
+                                </th>
+                                <th class="col-sm-1 sorttable-nosort">发帖时间</th>
+                                <th class="col-sm-1 sorttable-nosort">更新时间</th>
+                                <th class="col-sm-2 sorttable-nosort">操作</th>
+                            </tr>
+                            {% for row in rows %}
+                                <tr data-id="{{ row.id }}" class="icon-tr">
+                                    <td>{{ row.id }}</td>
+                                    <td>{{ row.title }}</td>
+                                    <td>
+                                {% with url='backend.user_profile_page', params={'id': row.user_id} %}
+                                <a href="{{ url_for(url, **(params or {})) }}">
+                                    {{ page_header['user_dict'][row.user_id] }}
+                                </a>
+                                {% endwith %}
+                                    </td>
+                                    <td>{{ row.comment_floor }}</td>
+                                    <td>{{ row.read_count }}</td>
+                                    <td>{{ row.like_count }}</td>
+                                    <td>{{ row.posted_at|datetime }}</td>
+                                    <td>{{ row.updated_at|datetime }}</td>
+                                    <td>
+                                    {% with url='backend.view_post_page', params={'id': row.id} %}
+                                        {% include 'common/buttons/view_button.html' %}
+                                    {% endwith %}
+                                    
+                                    {% if page_header['current_user'] == row.user_id or page_header['role'] == 256%}                       
+                                        {% with url='backend.update_post_page', params={'id': row.id} %}
+                                            {% include 'common/buttons/edit_button.html' %}
+                                        {% endwith %}       
+                                        {% with url='backend.delete_post', params={'id': row.id} %}
+                                            {% include 'common/buttons/delete_button.html' %}
+                                        {% endwith %}
+                                    {% endif %}                                  
+                                        
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan=10 class="center">无帖子</td>
+                                </tr>
+                            {% endfor %}
+    
+                            </tbody>
+                        </table>
+                    </div>
+                <div class="box-footer clearfix ">
+                    {{ paginate.links }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

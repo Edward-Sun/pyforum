@@ -68,3 +68,27 @@ class Post(db_wrapper.Model):
             post.content = content
             post.updated_at = now
             post.save()
+            
+    @staticmethod
+    def get_topten_read_post():
+        return Post.select().order_by(-Post.read_count).limit(10)
+
+    @staticmethod
+    def get_topten_reply_post():
+        return Post.select().order_by(-Post.comment_floor).limit(10)
+
+    @staticmethod
+    def get_users_with_module_orderby_postcount(module_id):
+        return  User.select(User.id, User.username, User.gender, User.level, fn.COUNT(User.id).alias('count'))\
+        .join(Post, on=(Post.user_id == User.id))\
+        .where(Post.module_id==module_id).group_by(User.id).order_by(-fn.COUNT(User.id), User.id)
+
+    @staticmethod
+    def get_post_over_avgRead(module_id):
+        return Post.select().where((Post.read_count>=Post.select(fn.AVG(Post.read_count)).where(Post.module_id==module_id))\
+        &(Post.module_id==module_id)).order_by(-Post.read_count)
+    
+    @staticmethod
+    def get_postnum_inTen(user_id):
+        now = time.time()
+        return Post.select().where((Post.user_id==user_id)&(now-Post.created_at<=600)).count()

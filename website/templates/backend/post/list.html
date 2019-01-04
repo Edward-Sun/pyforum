@@ -7,6 +7,30 @@
                     {% with url='backend.create_post_page', params={'id': page_header['id']} %}
                         {% include 'common/buttons/create_button.html' %}
                     {% endwith %}
+                    {% with url='backend.get_module_userInfo', params={'id': page_header['id']} %}
+                    <a href="{{ url_for(url,**(params or {})) }}"
+                        type="button"
+                        class="btn btn-info btn-sm"
+                        title="">曾在此板块发帖用户</a>
+                    {% endwith %}
+                    {% with url='backend.get_module_post_overavg', params={'id': page_header['id']} %}
+                    <a href="{{ url_for(url,**(params or {})) }}"
+                        type="button"
+                        class="btn btn-info btn-sm"
+                        title="">板块内热帖</a>
+                    {% endwith %} 
+                    {% with url='backend.get_module_active_user', params={'id': page_header['id']} %}
+                    <a href="{{ url_for(url,**(params or {})) }}"
+                        type="button"
+                        class="btn btn-info btn-sm"
+                        title="">板块内活跃用户</a>
+                    {% endwith %} 
+                    {% with url='backend.get_module_mostPopular_post', params={'id': page_header['id']} %}
+                    <a href="{{ url_for(url,**(params or {})) }}"
+                        type="button"
+                        class="btn btn-info btn-sm"
+                        title="">板块内最热贴</a>
+                    {% endwith %}
                     {% if page_header['role'] == 256%}                       
                         {% with url='backend.update_module_page', params={'id': page_header['id']} %}
                             {% include 'common/buttons/edit_module.html' %}

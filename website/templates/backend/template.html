@@ -85,6 +85,12 @@ desired effect
        
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top" role="navigation">
+            {% with url='backend.get_popular_post_with_read' %}
+            <a href="{{ url_for(url) }}"
+                type="button"
+                class="sidebar-toggle"
+                title="">全站热帖</a>
+            {% endwith %} 
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">

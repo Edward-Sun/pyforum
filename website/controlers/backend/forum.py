@@ -118,7 +118,16 @@ def create_post_page(id):
         print('POST Info')
         title = request.form['title']
         content = request.form['content']
-        Post.create_post(user_id=get_user_id(), module_id=id, title=title, content=content)
+        postnum_inTen=Post.get_postnum_inTen(get_user_id())
+        print("postnum: ", postnum_inTen)
+        if postnum_inTen<10:
+            Post.create_post(user_id=get_user_id(), module_id=id, title=title, content=content)
+            print("1")
+            return post_list(id)
+        else:
+            print("2")
+            return  render_template('post/abnormal.html',
+                                page_header={'title': '发帖过于频繁！已通知管理员！'})
         return post_list(id)
     else:
         return render_template('post/edit.html',
@@ -387,3 +396,165 @@ def create_user_page():
         return render_template('user/create_profile.html',
                                page_header={'title': '创建用户信息', 'method':'create_user_page'},
                                data={})
+    
+@backend.route('/module/<int:id>/UserInfo', methods=['GET'])
+@login_required
+@confirm_required
+@check_permission
+def get_module_userInfo(id):
+    rows = Post.get_users_with_module_orderby_postcount(id)
+    module = Module.get(Module.id == id)
+    if not module:
+        abort(404)
+    
+    role = Role.get_role(get_user_id(), id)
+    
+    user_dict = {}
+    for user in User.select():
+        user_dict[user.id] = user.username
+    
+    module_name = module.name
+    return object_list('post/moduleUser.html', paginate=FlaskPagination(query=rows), query=rows,
+                       context_variable='rows', paginate_by=10, check_bounds=False,
+                       page_header={'title':module_name + ': 该板块用户', 'id': id,
+                        'current_user': get_user_id(),
+                        'role': role,
+                        'user_dict': user_dict})
+
+@backend.route('/module/<int:id>/UserInfo2', methods=['GET'])
+@login_required
+@confirm_required
+@check_permission
+def get_module_userInfo2(id):
+    rows = Reply.get_users_with_module_orderby_replycount(id)
+    module = Module.get(Module.id == id)
+    if not module:
+        abort(404)
+    
+    role = Role.get_role(get_user_id(), id)
+    
+    user_dict = {}
+    for user in User.select():
+        user_dict[user.id] = user.username
+    
+    module_name = module.name
+    return object_list('post/moduleUser2.html', paginate=FlaskPagination(query=rows), query=rows,
+                       context_variable='rows', paginate_by=10, check_bounds=False,
+                       page_header={'title':module_name + ': 该板块用户', 'id': id,
+                        'current_user': get_user_id(),
+                        'role': role,
+                        'user_dict': user_dict})
+
+@backend.route('/popularPost/read', methods=['GET'])
+@login_required
+@confirm_required
+@check_permission
+def get_popular_post_with_read():
+    rows = Post.get_topten_read_post()
+
+    role = Role.get_role(get_user_id(), 0)
+    
+    user_dict = {}
+    for user in User.select():
+        user_dict[user.id] = user.username
+    
+    return object_list('popular_post.html', paginate=FlaskPagination(query=rows), query=rows,
+                       context_variable='rows', paginate_by=10, check_bounds=False,
+                       page_header={'title':'全站热帖',
+                        'current_user': get_user_id(),
+                        'role': role,
+                        'user_dict': user_dict})
+
+@backend.route('/popularPost/reply', methods=['GET'])
+@login_required
+@confirm_required
+@check_permission
+def get_popular_post_with_reply():
+    rows = Post.get_topten_reply_post()
+    
+    role = Role.get_role(get_user_id(), 0)
+    user_dict = {}
+    for user in User.select():
+        user_dict[user.id] = user.username
+    
+    return object_list('popular_post2.html', paginate=FlaskPagination(query=rows), query=rows,
+                       context_variable='rows', paginate_by=10, check_bounds=False,
+                       page_header={'title':'全站热帖',
+                        'current_user': get_user_id(),
+                        'role': role,
+                        'user_dict': user_dict})
+
+@backend.route('/module/<int:id>/popularpost', methods=['GET'])
+@login_required
+@confirm_required
+@check_permission
+def get_module_post_overavg(id):
+    rows = Post.get_post_over_avgRead(id)
+    module = Module.get(Module.id == id)
+    if not module:
+        abort(404)
+    
+    role = Role.get_role(get_user_id(), id)
+    
+    user_dict = {}
+    for user in User.select():
+        user_dict[user.id] = user.username
+    
+    module_name = module.name
+    return object_list('module/module_post_overavg.html', paginate=FlaskPagination(query=rows), query=rows,
+                       context_variable='rows', paginate_by=10, check_bounds=False,
+                       page_header={'title':module_name + ': 板块内热帖', 'id': id,
+                        'current_user': get_user_id(),
+                        'role': role,
+                        'user_dict': user_dict})
+
+@backend.route('/module/<int:id>/activeuser', methods=['GET'])
+@login_required
+@confirm_required
+@check_permission
+def get_module_active_user(id):
+    rows = Reply.get_user_over_avgReply(id)
+    module = Module.get(Module.id == id)
+    if not module:
+        abort(404)
+    
+    role = Role.get_role(get_user_id(), id)
+    
+    user_dict = {}
+    for user in User.select():
+        user_dict[user.id] = user.username
+    
+    module_name = module.name
+    return object_list('module/module_activeUser.html', paginate=FlaskPagination(query=rows), query=rows,
+                       context_variable='rows', paginate_by=10, check_bounds=False,
+                       page_header={'title':module_name + ': 板块内活跃用户', 'id': id,
+                        'current_user': get_user_id(),
+                        'role': role,
+                        'user_dict': user_dict})
+
+@backend.route('/module/<int:id>/mosthot', methods=['GET'])
+@login_required
+@confirm_required
+@check_permission
+def get_module_mostPopular_post(id):
+    post = Reply.get_most_popular_post(id)
+    rows = Reply.get_post_user(post.id)
+    module = Module.get(Module.id == id)
+    if not module:
+        abort(404)
+    
+    role = Role.get_role(get_user_id(), id)
+    
+    user_dict = {}
+    for user in User.select():
+        user_dict[user.id] = user.username
+    
+    module_name = module.name
+    return object_list('module/module_mostPopular_post.html', paginate=FlaskPagination(query=rows), query=rows,
+                       context_variable='rows', paginate_by=10, check_bounds=False,
+                       page_header={'title':module_name + ': 板块内最热帖', 'id': id, 'post_id': post.id, 
+                       'post_title':post.title, 'user_id':post.user_id, 'comment_floor':post.comment_floor, 'read_count':post.read_count,
+                       'like_count':post.like_count,  'posted_at':post.posted_at, 'updated_at':post.updated_at,
+                        'current_user': get_user_id(),
+                        'role': role,
+                        'user_dict': user_dict})
